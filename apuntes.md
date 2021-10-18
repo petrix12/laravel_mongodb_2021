@@ -38,10 +38,16 @@
     + $ git push -u origin main
 
 ### Video 003. Sobre el curso
-
-
+1. Instalar Laravel.
+2. Commit Video 003:
+    + $ git add .
+    + $ git commit -m "Commit 003: Sobre el curso"
+    + $ git push -u origin main
 
 ### Video 004. Estructura del curso
+
+
+
 ### Video 005. Requisitos para tomar el curso
 ### Video 006. Sobre las calificaciones
 
