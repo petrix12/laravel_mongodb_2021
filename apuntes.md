@@ -24,10 +24,23 @@
     + $ git push -u origin main
 
 ### Video 002. **** IMPORTANTE: Realizar preguntas
-
-
+1. Recuerda que si quieres ver TODO el contenido e ir viendo TODO lo que voy subiendo a lo largo del mes, desde la sección de anuncios es mi blog puedes buscar la publicación o desde este enlace:
+    + https://www.desarrollolibre.net/anuncios/contenido-para-septiembre-2021-actualizaciones-cursos-flask-vue-y-nuevo-curso-vue-native
+2. Youtube:
+    + [Aprende a usar las redirecciones en Django en menos de 5 minutos](https://www.youtube.com/watch?v=EvS-H-Y8T0M)
+    + [Migrar de RaisedButton a un ElevatedButton en Flutter](https://www.youtube.com/watch?v=EvS-H-Y8T0M)
+3. Mi Blog
+    + [Conoce unas historias de éxitos de empresas que migraron a Vue](https://www.desarrollolibre.net/blog/vue/9-empresas-que-utilizan-vuejs-en-2021)
+    + [Operaciones tipo CRUD con MongoDB](https://www.desarrollolibre.net/blog/mongodb/realizar-operaciones-crud-con-mongodb)
+4. Commit Video 002:
+    + $ git add .
+    + $ git commit -m "Commit 002: **** IMPORTANTE: Realizar preguntas"
+    + $ git push -u origin main
 
 ### Video 003. Sobre el curso
+
+
+
 ### Video 004. Estructura del curso
 ### Video 005. Requisitos para tomar el curso
 ### Video 006. Sobre las calificaciones
