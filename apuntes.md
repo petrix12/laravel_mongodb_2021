@@ -52,7 +52,17 @@
     + $ git push -u origin main
 
 ### Video 005. Requisitos para tomar el curso
+
+
+
+1. Commit Video 005:
+    + $ git add .
+    + $ git commit -m "Commit 005: Requisitos para tomar el curso"
+    + $ git push -u origin main
+
 ### Video 006. Sobre las calificaciones
+
+
 
 
 
