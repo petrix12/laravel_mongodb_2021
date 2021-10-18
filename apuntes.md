@@ -11,19 +11,22 @@
     + $ git add .
     + $ git commit -m "Commit 000: Antes de iniciar"
     + $ git branch -M main
-    + $ git remote add origin https://github.com/petrix12/mongo_db_2021.git
+    + $ git remote add origin https://github.com/petrix12/laravel_mongodb_2021.git
     + $ git push -u origin main
 
 ## Sección 01: Introducción
 
 ### Video 001. Introducción
-
+**Contenido**: Breve introducción sobre el curso.
 1. Commit Video 001:
     + $ git add .
     + $ git commit -m "Commit 001: Introducción"
     + $ git push -u origin main
 
 ### Video 002. **** IMPORTANTE: Realizar preguntas
+
+
+
 ### Video 003. Sobre el curso
 ### Video 004. Estructura del curso
 ### Video 005. Requisitos para tomar el curso
