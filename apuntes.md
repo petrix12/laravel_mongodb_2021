@@ -68,10 +68,25 @@
 ## Sección 02: Preparar el entorno de desarrollo
 
 ### Video 007. Instalar MongoDB en Windows con Laragon
-
-
++ https://www.mongodb.com/es
++ https://laragon.org/docs/quick-add.html
++ https://forum.laragon.org/topic/815/mongodb-addon-for-laragon
+1. Ejecutar **Laragon** e ir a **Menú > Herramientas > Quick add > mongodb-4** para instalar MongoDB.
+    + **Nota**: MongoDB se instalará en **C:\laragon\bin\mongodb\mongodb-4.0.3**
+    + **Ruta para ejecutar MongoDB**: C:\laragon\bin\mongodb\mongodb-4.0.3\
+2. Reiniciar los servicios de **Laragon** para activar los servicios de **MongoDB**.
+3. Agregar MongoDB al path del sistema de Windows:
+    + Ir a Variables de entorno del sistema y agregar la ruta:
+        + C:\laragon\bin\mongodb\mongodb-4.0.3
+4. Commit Video 007:
+    + $ git add .
+    + $ git commit -m "Commit 007: Instalar MongoDB en Windows con Laragon"
+    + $ git push -u origin main
 
 ### Video 008. Opcional: Instalar MongoDB en Windows (Sin Laragon)
+
+
+
 ### Video 009. Agregar la extensión (DLL) de MongoDB a PHP en Windows/Laragon
 ### Video 010. Actualizar MongoDB Windows con Laragon
 ### Video 011. Instalar MongoDB en MacOS
