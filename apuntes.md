@@ -45,8 +45,11 @@
     + $ git push -u origin main
 
 ### Video 004. Estructura del curso
-
-
+**Contenido**: El objetivo principal del curso es aprender trabajar MongoDB en Laravel.
+1. Commit Video 004:
+    + $ git add .
+    + $ git commit -m "Commit 004: Estructura del curso"
+    + $ git push -u origin main
 
 ### Video 005. Requisitos para tomar el curso
 ### Video 006. Sobre las calificaciones
