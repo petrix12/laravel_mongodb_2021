@@ -52,16 +52,32 @@
     + $ git push -u origin main
 
 ### Video 005. Requisitos para tomar el curso
-
-
-
+**Contenido**: Sobre requisitos del curso.
 1. Commit Video 005:
     + $ git add .
     + $ git commit -m "Commit 005: Requisitos para tomar el curso"
     + $ git push -u origin main
 
 ### Video 006. Sobre las calificaciones
+**Contenido**: Evaluar el curso honestamente.
+1. Commit Video 006:
+    + $ git add .
+    + $ git commit -m "Commit 006: Sobre las calificaciones"
+    + $ git push -u origin main
 
+## Sección 02: Preparar el entorno de desarrollo
+
+### Video 007. Instalar MongoDB en Windows con Laragon
+
+
+
+### Video 008. Opcional: Instalar MongoDB en Windows (Sin Laragon)
+### Video 009. Agregar la extensión (DLL) de MongoDB a PHP en Windows/Laragon
+### Video 010. Actualizar MongoDB Windows con Laragon
+### Video 011. Instalar MongoDB en MacOS
+### Video 012. Agregar la extensión (DLL) de MongoDB a PHP en general
+### Video 013. Crear el proyecto en Laravel 7
+### Video 014. Agregar dependencia para trabajar con MongoDB
 
 
 
