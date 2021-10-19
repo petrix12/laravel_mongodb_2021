@@ -120,10 +120,16 @@
     + $ git push -u origin main
 
 ### Video 011. Instalar MongoDB en MacOS
-
-
+**Contenido**: sobre como instalar MongoDB en una MacOS.
+5. Commit Video 011:
+    + $ git add .
+    + $ git commit -m "Commit 011: Instalar MongoDB en MacOS"
+    + $ git push -u origin main
 
 ### Video 012. Agregar la extensión (DLL) de MongoDB a PHP en general
+
+
+
 ### Video 013. Crear el proyecto en Laravel 7
 ### Video 014. Agregar dependencia para trabajar con MongoDB
 
