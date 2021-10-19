@@ -107,7 +107,9 @@
 ### Video 010. Actualizar MongoDB Windows con Laragon
 + Actualización MongoDB Laragon: https://forum.laragon.org/topic/172/tutorial-how-to-install-mongodb-extension/2
 + DLL's MongoDB PHP: https://dl.mongodb.org/dl/win32/x86_64
-1. Descargar la versión 4.2 de MongoDB en https://www.mongodb.com/download-center/community/releases/archive
+1. Descargar la versión 4.2 de MongoDB en:
+    + https://www.mongodb.com/download-center/community/releases/archive
+    + O también: https://dl.mongodb.org/dl/win32/x86_64
 2. Descomprimir la descarga y renombrar la carpeta **bin** a **mongodb-4.2** y ubicarla en **C:\laragon\bin\mongodb**.
 3. Ir a Laragon y seleccionar la nueva versión en:
     + Menú > MongoDB > Versión .....
@@ -121,14 +123,18 @@
 
 ### Video 011. Instalar MongoDB en MacOS
 **Contenido**: sobre como instalar MongoDB en una MacOS.
-5. Commit Video 011:
+1. Commit Video 011:
     + $ git add .
     + $ git commit -m "Commit 011: Instalar MongoDB en MacOS"
     + $ git push -u origin main
 
 ### Video 012. Agregar la extensión (DLL) de MongoDB a PHP en general
-
-
+1. Para instalar el controlador de MongoDB en Windows seguir los pasos indicados en la siguiente página:
+    + https://www.php.net/manual/es/mongodb.installation.windows.php
+2. Commit Video 012:
+    + $ git add .
+    + $ git commit -m "Commit 012: Agregar la extensión (DLL) de MongoDB a PHP en general"
+    + $ git push -u origin main
 
 ### Video 013. Crear el proyecto en Laravel 7
 ### Video 014. Agregar dependencia para trabajar con MongoDB
