@@ -83,11 +83,11 @@
     + $ git commit -m "Commit 007: Instalar MongoDB en Windows con Laragon"
     + $ git push -u origin main
 
-### Video 008. Opcional: Instalar MongoDB en Windows (Sin Laragon)
+### Nota 008. Opcional: Instalar MongoDB en Windows (Sin Laragon)
 1. **Opcional**: Instalar MongoDB en Windows (Sin Laragon)
     + También puedes instalar MongoDB de la manera tradicional (Esto es útil si necesitas trabajar con la última versión de MongoDB, que es descargando el instalador desde la web oficial en:
         + https://www.mongodb.com/try/download/community
-2. Commit Video 008:
+2. Commit Nota 008:
     + $ git add .
     + $ git commit -m "Commit 008: Opcional: Instalar MongoDB en Windows (Sin Laragon)"
     + $ git push -u origin main
@@ -146,17 +146,39 @@
     + $ git commit -m "Commit 013: Crear el proyecto en Laravel 7"
     + $ git push -u origin main
 
-
 ### Video 014. Agregar dependencia para trabajar con MongoDB
 + https://github.com/jenssegers/laravel-mongodb
-
-
-
-1. Commit Video 001:
+1. Instalar dependencias para MongoDB:
+    + $ composer require jenssegers/mongodb
+2. Commit Video 014:
     + $ git add .
-    + $ git commit -m "Commit 001: Recomendaciones para una mejor experiencia en el curso"
+    + $ git commit -m "Commit 014: Agregar dependencia para trabajar con MongoDB"
     + $ git push -u origin main
 
+## Sección 03: Primeros pasos con MongoDB: Operaciones CRUD
+
+### Video 015. Documentación a emplear y pasos a seguir
+
+
+
+### Video 016. Conociendo MongoDB
+### Video 017. Trabajando con las colecciones
+### Video 018. Métodos -insert- para crear documentos/registros
+### Video 019. Método -find- para buscar documentos/registros y findOne
+### Nota 020. Generación del ID
+### Video 021. Método -find- con parámetros de búsqueda (query) y campos (proyección)
+### Video 022. Método -update- para actualizar documentos
+### Video 023. Método -delete- para eliminar documentos
+### Nota 024. Consultas CRUD a realizar
+
+## Sección 04: Primeros pasos con Laravel y MongoDB
+
+### Video 025. Introducción
+### Video 026. Configurar la base de datos
+### Video 027. Crear un Modelo
+### Video 028. Realizar operaciones CRUD
+### Nota 029. Tarea
+### Nota 030. Operaciones CRUD realizadas
 
 
 
