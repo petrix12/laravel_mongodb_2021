@@ -137,8 +137,18 @@
     + $ git push -u origin main
 
 ### Video 013. Crear el proyecto en Laravel 7
-### Video 014. Agregar dependencia para trabajar con MongoDB
+1. Para crear un nuevo proyecto en Laravel ir a Laragon y ejecutar:
+    + Menú > Creación rápida de un sitio web > Laravel
+    + Nombre del proyecto: laramongo
+    + **Nota**: de aquí en adelante la apllicación se puede ejecutar en local en http://laramongo.test
+2. Commit Video 013:
+    + $ git add .
+    + $ git commit -m "Commit 013: Crear el proyecto en Laravel 7"
+    + $ git push -u origin main
 
+
+### Video 014. Agregar dependencia para trabajar con MongoDB
++ https://github.com/jenssegers/laravel-mongodb
 
 
 
