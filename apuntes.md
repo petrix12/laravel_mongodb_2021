@@ -93,10 +93,21 @@
     + $ git push -u origin main
 
 ### Video 009. Agregar la extensión (DLL) de MongoDB a PHP en Windows/Laragon
-
-
++ https://forum.laragon.org/login
+1. Ir a la página https://pecl.php.net/package/mongodb/1.8.0/windows y descargar la DLL compatible con tu versión de PHP de Laragon, en mi caso será: **7.4 Thread Safe (TS) x64**.
+2. Del archivo ZIP de la descarga extraer lm DLL (**php_mongodb.dll**) y pegarla en **C:\laragon\bin\php\php-7.4.19-Win32-vc15-x64\ext**.
+3. Para finalizar de instalar y configurar la extensión de MongoDB y a Laragon y habilitar la extensión en:
+    + Menú > PHP > Extensiones > mongodb
+    + **Nota**: de aquí en adelante se podrá usar MongoDB en cualquier proyecto de PHP en Laragon.
+4. Commit Video 009:
+    + $ git add .
+    + $ git commit -m "Commit 009: Agregar la extensión (DLL) de MongoDB a PHP en Windows/Laragon"
+    + $ git push -u origin main
 
 ### Video 010. Actualizar MongoDB Windows con Laragon
+
+
+
 ### Video 011. Instalar MongoDB en MacOS
 ### Video 012. Agregar la extensión (DLL) de MongoDB a PHP en general
 ### Video 013. Crear el proyecto en Laravel 7
