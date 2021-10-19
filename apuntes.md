@@ -180,10 +180,16 @@
     + $ git push -u origin main
 
 ### Video 016. Conociendo MongoDB
-
-
-
-2. Commit Video 016:
+1. Ejecutar MongoDB:
+    + $ mongo
+2. Ver las bases de datos:
+    + > show databases
+    ó
+    + > show dbs
+3. Para ubicarnos en la base de datos **crud**.
+    + > use crud
+    + **Nota**: **crud** no existirá hasta tanto no contenga ninguna colección con documentos.
+4. Commit Video 016:
     + $ git add .
     + $ git commit -m "Commit 016: Conociendo MongoDB"
     + $ git push -u origin main
