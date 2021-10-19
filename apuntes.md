@@ -75,10 +75,7 @@
     + **Nota**: MongoDB se instalará en **C:\laragon\bin\mongodb\mongodb-4.0.3**
     + **Ruta para ejecutar MongoDB**: C:\laragon\bin\mongodb\mongodb-4.0.3\
 2. Reiniciar los servicios de **Laragon** para activar los servicios de **MongoDB**.
-3. Agregar MongoDB al path del sistema de Windows:
-    + Ir a Variables de entorno del sistema y agregar la ruta:
-        + C:\laragon\bin\mongodb\mongodb-4.0.3
-4. Commit Video 007:
+3. Commit Video 007:
     + $ git add .
     + $ git commit -m "Commit 007: Instalar MongoDB en Windows con Laragon"
     + $ git push -u origin main
@@ -94,12 +91,35 @@
 
 ### Video 009. Agregar la extensión (DLL) de MongoDB a PHP en Windows/Laragon
 + https://forum.laragon.org/login
-1. Ir a la página https://pecl.php.net/package/mongodb/1.8.0/windows y descargar la DLL compatible con tu versión de PHP de Laragon, en mi caso será: **7.4 Thread Safe (TS) x64**.
-2. Del archivo ZIP de la descarga extraer lm DLL (**php_mongodb.dll**) y pegarla en **C:\laragon\bin\php\php-7.4.19-Win32-vc15-x64\ext**.
-3. Para finalizar de instalar y configurar la extensión de MongoDB y a Laragon y habilitar la extensión en:
-    + Menú > PHP > Extensiones > mongodb
-    + **Nota**: de aquí en adelante se podrá usar MongoDB en cualquier proyecto de PHP en Laragon.
-4. Commit Video 009:
+1. Ir a https://www.mongodb.com/try/download/community
+2. Descargar en formato **zip** la versión actual de MongoDB para tu SO.
+3. Descomprimir la descarga y extraer la carpeta **bin** (lo demás se puede eliminar).
+4. Renombrar la carpeta **bin** a **mongodb-[versión]** (Ejm.: **mongodb-5.03**) y ubicarla en:
+    + C:\laragon\bin\mongodb
+5. En laragon ir a **Menú > MongoDB** y cambiar la versión a la nueva.
+6. Anexar la siguiente ruta a las variables de entorno de Windows:
+    + C:\laragon\bin\mongodb\mongodb-[versión]
+7. Ir a https://pecl.php.net/package/mongodb y descargar la DLL (**X:X Thread Safe (TS) x64**) de la versión más actual y estable.
+8. Descomprimimos la descargas y movemos el archivo **php_mongodb.dll** a **C:\laragon\bin\php\php-7.4.19-Win32-vc15-x64\ext** el resto de la descarga lo borramos.
+9.  Modificar el archivo de configuración **C:\laragon\bin\php\php-7.4.19-Win32-vc15-x64\php.ini** para agregar la extensión de MongoDB **extension=php_mongodb.dll**:
+    ```ini
+    ≡
+    ;extension=soap
+    ;extension=sockets
+    ;extension=sodium
+    ;extension=sqlite3
+    ;extension=tidy
+    ;extension=xmlrpc
+    extension=xsl
+    extension=php_mongodb.dll
+
+    ;;;;;;;;;;;;;;;;;;;
+    ; Module Settings ;
+    ;;;;;;;;;;;;;;;;;;;
+    ≡
+    ```
+    + **Nota**: de aquí en adelante se podrá usar la nueva versión de MongoDB en cualquier proyecto de PHP en Laragon.
+10. Commit Video 009:
     + $ git add .
     + $ git commit -m "Commit 009: Agregar la extensión (DLL) de MongoDB a PHP en Windows/Laragon"
     + $ git push -u origin main
@@ -107,15 +127,7 @@
 ### Video 010. Actualizar MongoDB Windows con Laragon
 + Actualización MongoDB Laragon: https://forum.laragon.org/topic/172/tutorial-how-to-install-mongodb-extension/2
 + DLL's MongoDB PHP: https://dl.mongodb.org/dl/win32/x86_64
-1. Descargar la versión 4.2 de MongoDB en:
-    + https://www.mongodb.com/download-center/community/releases/archive
-    + O también: https://dl.mongodb.org/dl/win32/x86_64
-2. Descomprimir la descarga y renombrar la carpeta **bin** a **mongodb-4.2** y ubicarla en **C:\laragon\bin\mongodb**.
-3. Ir a Laragon y seleccionar la nueva versión en:
-    + Menú > MongoDB > Versión .....
-4. Reiniciar todos los servicios de Laragon.
-    + Las bases de datos de MongoDB se encuentran en:
-        + C:\laragon\data\mongodb-4
+**Contenido**: sobre como actualizar MongoDB.
 5. Commit Video 010:
     + $ git add .
     + $ git commit -m "Commit 010: Actualizar MongoDB Windows con Laragon"
@@ -129,9 +141,9 @@
     + $ git push -u origin main
 
 ### Video 012. Agregar la extensión (DLL) de MongoDB a PHP en general
-1. Para instalar el controlador de MongoDB en Windows seguir los pasos indicados en la siguiente página:
+**Contenido**: sobre como instalar el controlador de MongoDB en Windows. Para esta tarea seguir los pasos indicados en la siguiente página:
     + https://www.php.net/manual/es/mongodb.installation.windows.php
-2. Commit Video 012:
+1. Commit Video 012:
     + $ git add .
     + $ git commit -m "Commit 012: Agregar la extensión (DLL) de MongoDB a PHP en general"
     + $ git push -u origin main
@@ -140,7 +152,8 @@
 1. Para crear un nuevo proyecto en Laravel ir a Laragon y ejecutar:
     + Menú > Creación rápida de un sitio web > Laravel
     + Nombre del proyecto: laramongo
-    + **Nota**: de aquí en adelante la apllicación se puede ejecutar en local en http://laramongo.test
+    + **Nota 1**: de aquí en adelante la apllicación se puede ejecutar en local en http://laramongo.test
+    + **Nota 2**: este proyecto se montó en Laravel 8.
 2. Commit Video 013:
     + $ git add .
     + $ git commit -m "Commit 013: Crear el proyecto en Laravel 7"
@@ -149,6 +162,7 @@
 ### Video 014. Agregar dependencia para trabajar con MongoDB
 + https://github.com/jenssegers/laravel-mongodb
 1. Instalar dependencias para MongoDB:
+    + $ composer require mongodb/mongodb
     + $ composer require jenssegers/mongodb
 2. Commit Video 014:
     + $ git add .
@@ -158,11 +172,26 @@
 ## Sección 03: Primeros pasos con MongoDB: Operaciones CRUD
 
 ### Video 015. Documentación a emplear y pasos a seguir
-
-
++ https://docs.mongodb.com/manual
+1. Crear archivo JavaScript **consultas.js** para guardar las consultas que realizaremos a MongoDB.
+2. Commit Video 015:
+    + $ git add .
+    + $ git commit -m "Commit 015: Documentación a emplear y pasos a seguir"
+    + $ git push -u origin main
 
 ### Video 016. Conociendo MongoDB
+
+
+
+2. Commit Video 016:
+    + $ git add .
+    + $ git commit -m "Commit 016: Conociendo MongoDB"
+    + $ git push -u origin main
+
 ### Video 017. Trabajando con las colecciones
+
+
+
 ### Video 018. Métodos -insert- para crear documentos/registros
 ### Video 019. Método -find- para buscar documentos/registros y findOne
 ### Nota 020. Generación del ID
@@ -194,3 +223,91 @@
     + git reset HEAD^ --soft
 + Forzar push
     + git push origin -f
+
+## Conectar MongoDB con PHP utilizando XAMPP y Composer:
+1. Ir a https://www.mongodb.com/try/download/community
+2. Descargar e instalar la versión actual de MongoDB para tu SO.
+3. Iniciar los servicios de MongoDB ejecutano en una terminal:
+    + mongod
+4. Anexar la siguiente ruta a las variables de entorno de Windows:
+    + C:\Program Files\MongoDB\Server\5.0\bin
+5. Ir a https://pecl.php.net/package/mongodb y descargar la DLL (**X:X Thread Safe (TS) x64**) de la versión más actual y estable.
+6. Descomprimimos la descargas y movemos el archivo **php_mongodb.dll** a **C:\xampp\php\ext** el resto de la descarga lo borramos.
+7. Modificar el archivo de configuración **C:\xampp\php\php.ini** para agregar la extensión de MongoDB **extension=php_mongodb.dll**:
+    ```ini
+    ≡
+    ;extension=soap
+    ;extension=sockets
+    ;extension=sodium
+    ;extension=sqlite3
+    ;extension=tidy
+    ;extension=xmlrpc
+    ;extension=xsl
+    extension=php_mongodb.dll
+
+    ;;;;;;;;;;;;;;;;;;;
+    ; Module Settings ;
+    ;;;;;;;;;;;;;;;;;;;
+    ≡
+    ```
+8. Para probar la correcta instalación:
+    + Crear archivo **C:\xampp\htdocs\test.php**:
+        ```php
+        <?php
+            echo phpinfo();
+        ?>
+        ```
+    + En un navegador escribimos la siguiente ruta:
+        + http://localhost/test.php
+            + **Nota**: verificar que este encendido el servidor **Apache** de **XAMPP**.
+        + **Nota**: si todo salio bien debe aparecer el servicio de mongodb en la página.
+9. Ir a https://getcomposer.org y descargar e instalar Composer.
+    + **Nota**: verificar que la ruta completa de PHP sea:
+        + C:\xampp\php\php.exe
+10. Ejeuctar la siguiente instrucción para todos aquellos proyectos que requieran de MongoDB:
+    + $ composer require mongodb/mongodb
+
+## Conectar MongoDB con PHP utilizando Laragon y Composer:
+1. Ir a https://www.mongodb.com/try/download/community
+2. Descargar en formato **zip** la versión actual de MongoDB para tu SO.
+3. Descomprimir la descarga y extraer la carpeta **bin** (lo demás se puede eliminar).
+4. Renombrar la carpeta **bin** a **mongodb-[versión]** (Ejm.: **mongodb-5.03**) y ubicarla en:
+    + C:\laragon\bin\mongodb
+5. En laragon ir a **Menú > MongoDB** y cambiar la versión a la nueva.
+5. Anexar la siguiente ruta a las variables de entorno de Windows:
+    + C:\laragon\bin\mongodb\mongodb-[versión]
+6. Ir a https://pecl.php.net/package/mongodb y descargar la DLL (**X:X Thread Safe (TS) x64**) de la versión más actual y estable.
+7. Descomprimimos la descargas y movemos el archivo **php_mongodb.dll** a **C:\laragon\bin\php\php-7.4.19-Win32-vc15-x64\ext** el resto de la descarga lo borramos.
+8. Modificar el archivo de configuración **C:\laragon\bin\php\php-7.4.19-Win32-vc15-x64\php.ini** para agregar la extensión de MongoDB **extension=php_mongodb.dll**:
+    ```ini
+    ≡
+    ;extension=soap
+    ;extension=sockets
+    ;extension=sodium
+    ;extension=sqlite3
+    ;extension=tidy
+    ;extension=xmlrpc
+    extension=xsl
+    extension=php_mongodb.dll
+
+    ;;;;;;;;;;;;;;;;;;;
+    ; Module Settings ;
+    ;;;;;;;;;;;;;;;;;;;
+    ≡
+    ```
+9.  Para probar la correcta instalación:
+    + Crear archivo **C:\laragon\www\test\test.php**:
+        ```php
+        <?php
+            echo phpinfo();
+        ?>
+        ```
+    + En un navegador escribimos la siguiente ruta:
+        + http://test.test
+            + **Nota**: verificar que esten levantados los servicios de **Laragon**.
+        + **Nota**: si todo salio bien debe aparecer el servicio de mongodb en la página.
+10. Ir a https://getcomposer.org y descargar e instalar Composer.
+    + **Nota**: verificar que la ruta completa de PHP sea:
+        + C:\laragon\bin\php\php-7.4.19-Win32-vc15-x64\php.exe
+11. Ejeuctar la siguiente instrucción para todos aquellos proyectos que requieran de MongoDB:
+    + $ composer require mongodb/mongodb
