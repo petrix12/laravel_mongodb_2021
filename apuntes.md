@@ -84,10 +84,18 @@
     + $ git push -u origin main
 
 ### Video 008. Opcional: Instalar MongoDB en Windows (Sin Laragon)
-
-
+1. **Opcional**: Instalar MongoDB en Windows (Sin Laragon)
+    + También puedes instalar MongoDB de la manera tradicional (Esto es útil si necesitas trabajar con la última versión de MongoDB, que es descargando el instalador desde la web oficial en:
+        + https://www.mongodb.com/try/download/community
+2. Commit Video 008:
+    + $ git add .
+    + $ git commit -m "Commit 008: Opcional: Instalar MongoDB en Windows (Sin Laragon)"
+    + $ git push -u origin main
 
 ### Video 009. Agregar la extensión (DLL) de MongoDB a PHP en Windows/Laragon
+
+
+
 ### Video 010. Actualizar MongoDB Windows con Laragon
 ### Video 011. Instalar MongoDB en MacOS
 ### Video 012. Agregar la extensión (DLL) de MongoDB a PHP en general
