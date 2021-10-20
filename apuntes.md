@@ -466,7 +466,36 @@
     + $ git push -u origin main
 
 ### Video 027. Crear un Modelo
+1. Crear controlador para administrar un CRUD de libros:
+    + $ php artisan make:controller Dashboard/BookController -m Book
+2. Modificar el model **app\Models\Book.php** para adaptarlo a MongoDB:
+    ```php
+    <?php
+
+    namespace App\Models;
+
+    use Illuminate\Database\Eloquent\Factories\HasFactory;
+    /* use Illuminate\Database\Eloquent\Model; */
+    use Jenssegers\Mongodb\Eloquent\Model;
+
+    class Book extends Model
+    {
+        use HasFactory;
+
+        protected $primaryKey = 'id';
+        protected $fillable = ['id', 'title', 'description'];
+        protected $collection = 'books_collections';
+    }
+    ```
+3. Commit Video 027:
+    + $ git add .
+    + $ git commit -m "Commit 027: Crear un Modelo"
+    + $ git push -u origin main
+
 ### Video 028. Realizar operaciones CRUD
+
+
+
 ### Nota 029. Tarea
 ### Nota 030. Operaciones CRUD realizadas
 
