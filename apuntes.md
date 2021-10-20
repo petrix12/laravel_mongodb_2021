@@ -18,7 +18,7 @@
 ## Sección 01: Introducción
 
 ### Video 001. Introducción
-**Contenido**: Breve introducción sobre el curso.
++ **Contenido**: Breve introducción sobre el curso.
 1. Commit Video 001:
     + $ git add .
     + $ git commit -m "Commit 001: Introducción"
@@ -46,21 +46,21 @@
     + $ git push -u origin main
 
 ### Video 004. Estructura del curso
-**Contenido**: El objetivo principal del curso es aprender trabajar MongoDB en Laravel.
++ **Contenido**: El objetivo principal del curso es aprender trabajar MongoDB en Laravel.
 1. Commit Video 004:
     + $ git add .
     + $ git commit -m "Commit 004: Estructura del curso"
     + $ git push -u origin main
 
 ### Video 005. Requisitos para tomar el curso
-**Contenido**: Sobre requisitos del curso.
++ **Contenido**: Sobre requisitos del curso.
 1. Commit Video 005:
     + $ git add .
     + $ git commit -m "Commit 005: Requisitos para tomar el curso"
     + $ git push -u origin main
 
 ### Video 006. Sobre las calificaciones
-**Contenido**: Evaluar el curso honestamente.
++ **Contenido**: Evaluar el curso honestamente.
 1. Commit Video 006:
     + $ git add .
     + $ git commit -m "Commit 006: Sobre las calificaciones"
@@ -128,21 +128,21 @@
 ### Video 010. Actualizar MongoDB Windows con Laragon
 + Actualización MongoDB Laragon: https://forum.laragon.org/topic/172/tutorial-how-to-install-mongodb-extension/2
 + DLL's MongoDB PHP: https://dl.mongodb.org/dl/win32/x86_64
-**Contenido**: sobre como actualizar MongoDB.
++ **Contenido**: sobre como actualizar MongoDB.
 5. Commit Video 010:
     + $ git add .
     + $ git commit -m "Commit 010: Actualizar MongoDB Windows con Laragon"
     + $ git push -u origin main
 
 ### Video 011. Instalar MongoDB en MacOS
-**Contenido**: sobre como instalar MongoDB en una MacOS.
++ **Contenido**: sobre como instalar MongoDB en una MacOS.
 1. Commit Video 011:
     + $ git add .
     + $ git commit -m "Commit 011: Instalar MongoDB en MacOS"
     + $ git push -u origin main
 
 ### Video 012. Agregar la extensión (DLL) de MongoDB a PHP en general
-**Contenido**: sobre como instalar el controlador de MongoDB en Windows. Para esta tarea seguir los pasos indicados en la siguiente página:
++ **Contenido**: sobre como instalar el controlador de MongoDB en Windows. Para esta tarea seguir los pasos indicados en la siguiente página:
     + https://www.php.net/manual/es/mongodb.installation.windows.php
 1. Commit Video 012:
     + $ git add .
@@ -413,8 +413,11 @@
 ## Sección 04: Primeros pasos con Laravel y MongoDB
 
 ### Video 025. Introducción
-
-
++ **Contenido**: sobre la creación de un modelo para nuestros datos en MongoDB.
+1. Commit Video 025:
+    + $ git add .
+    + $ git commit -m "Commit 025: Introducción"
+    + $ git push -u origin main
 
 ### Video 026. Configurar la base de datos
 ### Video 027. Crear un Modelo
