@@ -568,8 +568,11 @@
     + $ git push -u origin main
 
 ### Nota 029. Tarea
-
-
+1. **Tarea**: Como Tarea debes de realizar las mismas operaciones tipo CRUD que vimos anteriormente e intenta agregar o variar algunas condiciones en cualquier tipo de consulta, variar los parámetros al momento de obtener datos, actualizarlos, insertarlos etc.
+2. Commit Video 029:
+    + $ git add .
+    + $ git commit -m "Commit 029: Tarea"
+    + $ git push -u origin main
 
 ### Nota 030. Operaciones CRUD realizadas
 
