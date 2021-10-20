@@ -150,11 +150,9 @@
     + $ git push -u origin main
 
 ### Video 013. Crear el proyecto en Laravel 7
-1. Para crear un nuevo proyecto en Laravel ir a Laragon y ejecutar:
-    + Menú > Creación rápida de un sitio web > Laravel
-    + Nombre del proyecto: laramongo
-    + **Nota 1**: de aquí en adelante la apllicación se puede ejecutar en local en http://laramongo.test
-    + **Nota 2**: este proyecto se montó en Laravel 8.
+1. Crear proyecto Laravel
+    + $ composer create-project laravel/laravel 29laravel_mongo "7.*"
+    + **Nota 1**: de aquí en adelante la apllicación se puede ejecutar en local en http://29laravel_mongo.test
 2. Commit Video 013:
     + $ git add .
     + $ git commit -m "Commit 013: Crear el proyecto en Laravel 7"
@@ -164,7 +162,7 @@
 + https://github.com/jenssegers/laravel-mongodb
 1. Instalar dependencias para MongoDB:
     + $ composer require mongodb/mongodb
-    + $ composer require jenssegers/mongodb
+    + $ composer require jenssegers/mongodb:4.0.0-alpha.1
 2. Commit Video 014:
     + $ git add .
     + $ git commit -m "Commit 014: Agregar dependencia para trabajar con MongoDB"
@@ -630,7 +628,7 @@
 ### Video 032. Instalar LaravelUI
 + https://laravel.com/docs/7.x/frontend
 1. Instalar Laravel UI:
-    + $ composer require laravel/ui
+    + $ composer require laravel/ui:^2.4
 2. Commit Video 032:
     + $ git add .
     + $ git commit -m "Commit 032: Instalar LaravelUI"
@@ -647,6 +645,7 @@
     + $ git push -u origin main
 
 ### Video 034. Opcional: Usar Bootstrap 5
++ **NOTA**: Para este proyecto no se ejecutaron estos pasos
 + https://getbootstrap.com/
 1. Eliminar las dependencias: **"bootstrap": "^4.6.0"** y **"jquery": "^3.6"** en **package.json**.
 2. Ejecutar:
@@ -687,12 +686,9 @@
 
     namespace App\Models;
 
-    use Illuminate\Contracts\Auth\MustVerifyEmail;
-    use Illuminate\Database\Eloquent\Factories\HasFactory;
+    ≡
     /* use Illuminate\Foundation\Auth\User as Authenticatable; */
     use Jenssegers\Mongodb\Auth\User as Authenticatable;
-    use Illuminate\Notifications\Notifiable;
-    use Laravel\Sanctum\HasApiTokens;
     ≡
     ```
 2. Commit Video 036:
@@ -744,12 +740,9 @@
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
                     @guest
-                        @if (Route::has('login'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                        @endif
-
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
                         @if (Route::has('register'))
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
@@ -763,8 +756,8 @@
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">
+                                    onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
 
@@ -784,9 +777,66 @@
     + $ git commit -m "Commit 037: Crear template maestro"
     + $ git push -u origin main
 
-### Video 038. CRUD: Crear listado de libros
+### Video 038. CRUD: Crear lista de libros
+1. Modificar el archivo de rutas **routes\web.php**:
+    ```php
+    <?php
 
+    use Illuminate\Support\Facades\Route;
 
+    Route::get('/', function () {
+        return view('welcome');
+    });
+
+    Auth::routes();
+
+    Route::get('/home', 'HomeController@index')->name('home');
+
+    Route::resource('dashboard/book', 'Dashboard\BookController');
+    ```
+2. Programar el método **index** del controlador **app\Http\Controllers\Dashboard\BookController.php**:
+    ```php
+    public function index()
+    {
+        $books = Book::orderBy('created_at', 'desc')->paginate(10);
+        return view('dashboard.book.index', compact('books'));
+    }
+    ```
+3. Diseñar vista **resources\views\dashboard\book\index.blade.php**:
+    ```php
+    @extends('dashboard.master')
+    @section('content')
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Creación</th>
+                    <th>Actualización</th>
+                    <th>Año</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($books as $book)
+                    <tr>
+                        <td>{{ $book->_id }}</td>
+                        <td>{{ $book->title }}</td>
+                        <td>{{ $book->created_at->format('d-m-Y') }}</td>
+                        <td>{{ $book->updated_at->format('d-m-Y') }}</td>
+                        <td>{{ $book->age }}</td>
+                        <td></td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+        {{ $books->links() }}
+    @endsection
+    ```
+5. Commit Video 038:
+    + $ git add .
+    + $ git commit -m "Commit 038: CRUD: Crear lista de libros"
+    + $ git push -u origin main
 
 ### Video 039. CRUD: Crear libros
 ### Video 040. CRUD: Mostrar mensaje de éxito
