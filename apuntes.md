@@ -246,8 +246,20 @@
     + $ git push -u origin main
 
 ### Video 021. Método -find- con parámetros de búsqueda (query) y campos (proyección)
-
-
+1. Obtener un documento de la colección **books**:
+    + > db.books.findOne()
+2. Obtener un documento de la colección **books** en donde la clave **name** tenga el valor de **Harry Potter y La Piedra Filosofal**:
+    + > db.books.findOne({'name': "Harry Potter y La Piedra Filosofal"})
+3. Obtener los documentos de la colección **books** en donde la clave **name** tenga el valor de **Harry Potter y La Piedra Filosofal**:
+    + > db.books.find({'name': "Harry Potter y La Piedra Filosofal"})
+4. Obtener los documentos de la colección **books** en donde la clave **name** tenga el valor de **Harry Potter y La Piedra Filosofal** pero que regrese solamente la clave **name**:
+    + > db.books.find({'name': "Harry Potter y La Piedra Filosofal"}, {'name': true})
+5. Obtener los documentos de la colección **books** en donde la clave **name** tenga el valor de **Harry Potter y La Piedra Filosofal** pero que regrese solamente la clave **name** y que no aparezca la clave **_id**:
+    + > db.books.find({'name': "Harry Potter y La Piedra Filosofal"}, {'name': true, '_id': false})
+6. Commit Video 021:
+    + $ git add .
+    + $ git commit -m "Commit 021: Método -find- con parámetros de búsqueda (query) y campos (proyección)"
+    + $ git push -u origin main
 
 ### Video 022. Método -update- para actualizar documentos
 ### Video 023. Método -delete- para eliminar documentos

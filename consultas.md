@@ -74,6 +74,52 @@ var book3 = {
 ## Mostrar todos los documentos de la colección **books**:
 + db.books.find()
 
+## Obtener un documento de la colección **books**:
++ db.books.findOne()
+
+## Obtener un documento de la colección **books** en donde la clave **name** tenga el valor de **Harry Potter y La Piedra Filosofal**:
+```js
+db.books.findOne(
+    {
+        'name': "Harry Potter y La Piedra Filosofal"
+    }
+)
+```
+## Obtener los documentos de la colección **books** en donde la clave **name** tenga el valor de **Harry Potter y La Piedra Filosofal**:
+```js
+db.books.find(
+    {
+        'name': "Harry Potter y La Piedra Filosofal"
+    }
+)
+```
+## Obtener los documentos de la colección **books** en donde la clave **name** tenga el valor de **Harry Potter y La Piedra Filosofal** pero que regrese solamente la clave **name**:
+```js
+db.books.find(
+    {
+        'name': "Harry Potter y La Piedra Filosofal"
+    }, 
+    {
+        'name': true
+    }
+)
+```
+## Obtener los documentos de la colección **books** en donde la clave **name** tenga el valor de **Harry Potter y La Piedra Filosofal** pero que regrese solamente la clave **name** y que no aparezca la clave **_id**:
+```js
+db.books.find(
+    {
+        'name': "Harry Potter y La Piedra Filosofal"
+    },
+    {
+        'name': true, 
+        '_id': false
+    }
+)
+```
+
+
+
+
 
 ```js
 ```
