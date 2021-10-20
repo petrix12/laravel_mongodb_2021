@@ -235,10 +235,20 @@
     + $ git push -u origin main
 
 ### Nota 020. Generación del ID
-
-
++ https://docs.mongodb.com/manual/reference/method/ObjectId
+1. **Generación del ID**: MongoDB toma varios aspectos para generar el identificador o ID de cada documento (registro) que guarda en nuestras colecciones (tablas). El ID, es generado con una función llamada ObjectID la cual genera valor de 12 byte:
+    + 4 byte que corresponden a un timestamp de la PC.
+    + 5 byte de un valor aleatorio.
+    + 3 byte de un contador aleatorio incremental.
+2. Commit Video 020:
+    + $ git add .
+    + $ git commit -m "Commit 020: Generación del ID"
+    + $ git push -u origin main
 
 ### Video 021. Método -find- con parámetros de búsqueda (query) y campos (proyección)
+
+
+
 ### Video 022. Método -update- para actualizar documentos
 ### Video 023. Método -delete- para eliminar documentos
 ### Nota 024. Consultas CRUD a realizar
