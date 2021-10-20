@@ -205,10 +205,31 @@
     + $ git push -u origin main
 
 ### Video 018. Métodos -insert- para crear documentos/registros
-
-
+1. Crear un documento:
+    + > var book1 = {'name': 'El señor de los anillos', 'description': 'Libro de fantasia'}
+2. Ver el documento **book1**:
+    + > book1
+3. Ver el name del documento **book1**:
+    + > book1.name
+4. Crear colección **books** con el documento **book1**:
+    + > db.books.insertOne(book1)
+5. Crear los documentos **book2** y **book3**:
+    + > var book2 = {'name': 'Harry Potter y La Piedra Filosofal', 'description': 'Libro de fantasia'}
+    + > var book3 = {'name': 'Harry Potter y La Cámara Secreta', 'description': 'Libro de fantasia'}
+6. Incluir los documentos **book2** y **book3** en la colección **books**:
+    + > db.books.insertMany([book2, book3])
+7. Ejecutar:
+    + db.books.insert(book1)
+    + db.books.insert([book2, book3])
+8. Commit Video 018:
+    + $ git add .
+    + $ git commit -m "Commit 018: Métodos -insert- para crear documentos/registros"
+    + $ git push -u origin main
 
 ### Video 019. Método -find- para buscar documentos/registros y findOne
+
+
+
 ### Nota 020. Generación del ID
 ### Video 021. Método -find- con parámetros de búsqueda (query) y campos (proyección)
 ### Video 022. Método -update- para actualizar documentos
