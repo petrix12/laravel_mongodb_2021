@@ -681,10 +681,29 @@
     + $ git push -u origin main
 
 ### Video 036. Registrar un usuario
+1. Modificar el modelo **app\Models\User.php** para realizar adaptaciones con MongoDB:
+    ```php
+    <?php
 
+    namespace App\Models;
 
+    use Illuminate\Contracts\Auth\MustVerifyEmail;
+    use Illuminate\Database\Eloquent\Factories\HasFactory;
+    /* use Illuminate\Foundation\Auth\User as Authenticatable; */
+    use Jenssegers\Mongodb\Auth\User as Authenticatable;
+    use Illuminate\Notifications\Notifiable;
+    use Laravel\Sanctum\HasApiTokens;
+    ≡
+    ```
+2. Commit Video 036:
+    + $ git add .
+    + $ git commit -m "Commit 036: Registrar un usuario"
+    + $ git push -u origin main
 
 ### Video 037. Crear template maestro
+
+
+
 ### Video 038. CRUD: Crear listado de libros
 ### Video 039. CRUD: Crear libros
 ### Video 040. CRUD: Mostrar mensaje de éxito
