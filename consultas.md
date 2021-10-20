@@ -48,10 +48,15 @@ var book1 = {
 ## Ver el name del documento **book1**:
 + book1.name
 
-## Crear colección **books** con el documento **book1**:
+## Comandos para crear documentos:
++ db.collection.insert()
++ db.collection.insertOne()
++ db.collection.insertMany()
+
+### Crear colección **books** con el documento **book1**:
 + db.books.insertOne(book1)
 
-## Crear los documentos book2 y book3:
+### Crear los documentos book2 y book3:
 ```js
 var book2 = {
     'name': 'Harry Potter y La Piedra Filosofal',
@@ -64,20 +69,25 @@ var book3 = {
 }
 ```
 
-## Incluir los documentos **book2** y **book3** en la colección **books**:
+### Incluir los documentos **book2** y **book3** en la colección **books**:
 + db.books.insertMany([book2, book3])
 
-## Instrucciones equivalente para insertar book1, book2 y book3 en la colección books:
+### Instrucciones equivalente para insertar book1, book2 y book3 en la colección books:
 + db.books.insert(book1)            (equivalente a db.books.insertOne(book1))
 + db.books.insert([book2, book3])   (equivalente a db.books.insertMany([book2, book3]))
 
-## Mostrar todos los documentos de la colección **books**:
+## Comandos para mostrar documentos:
++ db.collection.find()
++ db.collection.findOne()
++ db.collection.findMany()
+
+### Mostrar todos los documentos de la colección **books**:
 + db.books.find()
 
-## Obtener un documento de la colección **books**:
+### Obtener un documento de la colección **books**:
 + db.books.findOne()
 
-## Obtener un documento de la colección **books** en donde la clave **name** tenga el valor de **Harry Potter y La Piedra Filosofal**:
+### Obtener un documento de la colección **books** en donde la clave **name** tenga el valor de **Harry Potter y La Piedra Filosofal**:
 ```js
 db.books.findOne(
     {
@@ -85,7 +95,7 @@ db.books.findOne(
     }
 )
 ```
-## Obtener los documentos de la colección **books** en donde la clave **name** tenga el valor de **Harry Potter y La Piedra Filosofal**:
+### Obtener los documentos de la colección **books** en donde la clave **name** tenga el valor de **Harry Potter y La Piedra Filosofal**:
 ```js
 db.books.find(
     {
@@ -93,7 +103,7 @@ db.books.find(
     }
 )
 ```
-## Obtener los documentos de la colección **books** en donde la clave **name** tenga el valor de **Harry Potter y La Piedra Filosofal** pero que regrese solamente la clave **name**:
+### Obtener los documentos de la colección **books** en donde la clave **name** tenga el valor de **Harry Potter y La Piedra Filosofal** pero que regrese solamente la clave **name**:
 ```js
 db.books.find(
     {
@@ -104,6 +114,10 @@ db.books.find(
     }
 )
 ```
+
+### Obtener documentos de una manera más legible:
++ db.books.find().pretty()
+
 ## Obtener los documentos de la colección **books** en donde la clave **name** tenga el valor de **Harry Potter y La Piedra Filosofal** pero que regrese solamente la clave **name** y que no aparezca la clave **_id**:
 ```js
 db.books.find(
@@ -121,7 +135,7 @@ db.books.find(
 + db.collection.updateMany()
 + db.collection.replaceOne()
 
-## Actualizar el documento por _id:
+### Actualizar el documento por _id:
 ```js
 db.books.updateOne(
     {
@@ -135,7 +149,7 @@ db.books.updateOne(
 )
 ```
 
-## Actualizar el documento por name:
+### Actualizar el documento por name:
 ```js
 db.books.updateMany(
     {
@@ -149,7 +163,7 @@ db.books.updateMany(
 )
 ```
 
-## Actualizar y agregar clave a documento:
+### Actualizar y agregar clave a documento:
 ```js
 db.books.updateMany(
     {
@@ -163,6 +177,20 @@ db.books.updateMany(
     }
 )
 ```
+
+## Comandos para eliminar documentos:
++ db.collection.deleteOne()
++ db.collection.deleteMany()
+
+### Eliminar documento por _id:
+```js
+db.books.deleteOne(
+    {
+        '_id' : ObjectId("616f6d98e52184190e6f0c7f")
+    }
+)
+```
+
 
 
 

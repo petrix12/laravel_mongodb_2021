@@ -270,8 +270,14 @@
     + $ git push -u origin main
 
 ### Video 023. Método -delete- para eliminar documentos
-
-
+1. Eliminar el registro con :Eliminar documento por **"_id" : ObjectId("616f6d98e52184190e6f0c7f")**:
+    + > db.books.deleteOne({ '_id' : ObjectId("616f6d98e52184190e6f0c7f")})
+2. Salir de la consola de MongoDB:
+    + > exit
+3. Commit Video 023:
+    + $ git add .
+    + $ git commit -m "Commit 023: Método -delete- para eliminar documentos"
+    + $ git push -u origin main
 
 ### Nota 024. Consultas CRUD a realizar
 
