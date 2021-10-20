@@ -621,11 +621,25 @@
 ## Sección 05: Crear un CRUD de libros con Laravel y MongoDB
 
 ### Video 031. Introducción
-
-
++ **Contenido**: muestra de la aplicación CRUD a desarrollar en esta sección.
+1. Commit Video 031:
+    + $ git add .
+    + $ git commit -m "Commit 031: Introducción"
+    + $ git push -u origin main
 
 ### Video 032. Instalar LaravelUI
++ https://laravel.com/docs/7.x/frontend
+1. Instalar LaravelUI:
+    + $ composer require laravel/ui
+2. Commit Video 032:
+    + $ git add .
+    + $ git commit -m "Commit 032: Instalar LaravelUI"
+    + $ git push -u origin main
+
 ### Video 033. Configurar nuestro proyecto con LaravelUI (Bootstrap)
+
+
+
 ### Video 034. Opcional: Usar Bootstrap 5
 ### Video 035. Opcional: Instalar FontAwesome
 ### Video 036. Registrar un usuario
@@ -638,7 +652,7 @@
 ### Video 043. CRUD: Enlaces CRUD en el index
 ### Video 044. CRUD Eliminar libros
 ### Video 045. Algunos detalles en la aplicación
-### Video 046. Código fuente
+### Nota 046. Código fuente
 
 
 
