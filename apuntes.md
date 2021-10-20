@@ -629,7 +629,7 @@
 
 ### Video 032. Instalar LaravelUI
 + https://laravel.com/docs/7.x/frontend
-1. Instalar LaravelUI:
+1. Instalar Laravel UI:
     + $ composer require laravel/ui
 2. Commit Video 032:
     + $ git add .
@@ -637,10 +637,24 @@
     + $ git push -u origin main
 
 ### Video 033. Configurar nuestro proyecto con LaravelUI (Bootstrap)
-
-
+1. Instalar Bootstrap:
+    + $ php artisan ui bootstrap --auth
+    + $ npm install
+    + $ npm run dev
+2. Agregar el CDN del CSS de Bootstrap a la plantilla **resources\views\layouts\app.blade.php**:
+    ```php
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    ```
+3. Commit Video 033:
+    + $ git add .
+    + $ git commit -m "Commit 033:  Configurar nuestro proyecto con LaravelUI (Bootstrap)"
+    + $ git push -u origin main
 
 ### Video 034. Opcional: Usar Bootstrap 5
+
+
+
 ### Video 035. Opcional: Instalar FontAwesome
 ### Video 036. Registrar un usuario
 ### Video 037. Crear template maestro
