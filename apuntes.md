@@ -420,6 +420,51 @@
     + $ git push -u origin main
 
 ### Video 026. Configurar la base de datos
+1. Agregar los parámetros de configuración de MongoDB en el archivo de configuración **config\database.php**:
+    ```php
+    ≡
+    return [
+        ≡
+        'connections' => [
+
+            'mongodb' => [
+                'driver' => 'mongodb',
+                'host' => env('DB_HOST', '127.0.0.1'),
+                'port' => env('DB_PORT', 27017),
+                'database' => env('DB_DATABASE', 'laramongo'),
+                'username' => env('DB_USERNAME', ''),
+                'password' => env('DB_PASSWORD', ''),
+                'options' => [
+                    // here you can pass more settings to the Mongo Driver Manager
+                    // see https://www.php.net/manual/en/mongodb-driver-manager.construct.php under "Uri Options" for a list of complete parameters that you can use
+            
+                    'database' => env('DB_AUTHENTICATION_DATABASE', 'admin'), // required with Mongo 3+
+                ],
+            ],
+
+            'sqlite' => [
+                ≡
+            ],
+            ≡
+        ],
+        ≡
+    ];
+    ```
+2. Configurar las variables de entorno de baso de datos del archivo **.env** para establecer MongoDB como base de datos:
+    ```php
+    DB_CONNECTION=mongodb
+    DB_HOST=127.0.0.1
+    DB_PORT=27017
+    DB_DATABASE=laramongo
+    DB_USERNAME=
+    DB_PASSWORD=
+    ```
+    + **Nota**: La base de datos de MongoDB se creará sola cuando se ejecute la primera inserción en ella, por tal motivo no tendremos que crearla previamente.
+3. Commit Video 026:
+    + $ git add .
+    + $ git commit -m "Commit 026: Configurar la base de datos"
+    + $ git push -u origin main
+
 ### Video 027. Crear un Modelo
 ### Video 028. Realizar operaciones CRUD
 ### Nota 029. Tarea
@@ -429,7 +474,7 @@
 
 
     ≡
-    ```json
+    ```php
     ```
 
 ## Comandos Git:

@@ -2,6 +2,9 @@
 ## Ejecutar MongoDB:
 + $ mongo
 
+## Salir de la consola de MongoDB:
++ > exit
+
 ## Ver las bases de datos:
 + show databases
 + show dbs
