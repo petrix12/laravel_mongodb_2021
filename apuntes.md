@@ -569,12 +569,78 @@
 
 ### Nota 029. Tarea
 1. **Tarea**: Como Tarea debes de realizar las mismas operaciones tipo CRUD que vimos anteriormente e intenta agregar o variar algunas condiciones en cualquier tipo de consulta, variar los parámetros al momento de obtener datos, actualizarlos, insertarlos etc.
-2. Commit Video 029:
+2. Commit Nota 029:
     + $ git add .
     + $ git commit -m "Commit 029: Tarea"
     + $ git push -u origin main
 
 ### Nota 030. Operaciones CRUD realizadas
+1. Operaciones CRUD realizadas:
+    ```php
+    /*
+    //*** Crear documentos (libros)
+
+    // crear con algunos parametros
+    Book::create(
+        ['title' =>"the witcher"]
+    );
+    Book::create(
+        ['title' =>"the witcher",'description' => "Hola Mundo"]
+    );
+
+    // Buscar por where
+    //$books = Book::where('title', "Cualquier cosa")->get(); 
+    
+    // buscar libros dado algunas condiciones
+    $books = Book::where('title', "the witcher")
+    //->whereNotNull('description')
+    ->whereNull('description')
+    //->toSql(); // ver SQL de la consulta
+    ->get(); 
+    // $books = Book::all(); obtener todos los documentos de la coleccion
+    //dd($books);
+
+    // buscar por ID del documento
+    $b = Book::find('5f47fde040090000c500688f')->increment('age');
+
+    // actualizar libro seleccionado
+    $b->update(['title' =>"the witcher 2.0", 'age' => 2017]);
+
+    // borrar libro seleccionado
+    $b->delete();
+
+    // encontrar por ID
+    $b = Book::find('5f47fde040090000c500688f');
+    */
+    ```
+2. Commit Nota 030:
+    + $ git add .
+    + $ git commit -m "Commit 030: Operaciones CRUD realizadas"
+    + $ git push -u origin main
+
+## Sección 05: Crear un CRUD de libros con Laravel y MongoDB
+
+### Video 031. Introducción
+
+
+
+### Video 032. Instalar LaravelUI
+### Video 033. Configurar nuestro proyecto con LaravelUI (Bootstrap)
+### Video 034. Opcional: Usar Bootstrap 5
+### Video 035. Opcional: Instalar FontAwesome
+### Video 036. Registrar un usuario
+### Video 037. Crear template maestro
+### Video 038. CRUD: Crear listado de libros
+### Video 039. CRUD: Crear libros
+### Video 040. CRUD: Mostrar mensaje de éxito
+### Video 041. CRUD: Validaciones
+### Video 042. CRUD: Editar libros
+### Video 043. CRUD: Enlaces CRUD en el index
+### Video 044. CRUD Eliminar libros
+### Video 045. Algunos detalles en la aplicación
+### Video 046. Código fuente
+
+
 
 
 
