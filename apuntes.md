@@ -262,7 +262,17 @@
     + $ git push -u origin main
 
 ### Video 022. Método -update- para actualizar documentos
+1. Actualizar el documento con **"_id" : ObjectId("616f6c6de52184190e6f0c7c")**:
+    + db.books.updateOne({'_id': ObjectId("616f6d98e52184190e6f0c7f")}, {$set: {'name': "Harry Potter y el prisionero de Azcaban"}})
+2. Commit Video 022:
+    + $ git add .
+    + $ git commit -m "Commit 022: Método -update- para actualizar documentos"
+    + $ git push -u origin main
+
 ### Video 023. Método -delete- para eliminar documentos
+
+
+
 ### Nota 024. Consultas CRUD a realizar
 
 ## Sección 04: Primeros pasos con Laravel y MongoDB

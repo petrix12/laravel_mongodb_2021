@@ -116,8 +116,53 @@ db.books.find(
     }
 )
 ```
+## Comandos para actualizar documentos:
++ db.collection.updateOne()
++ db.collection.updateMany()
++ db.collection.replaceOne()
 
+## Actualizar el documento por _id:
+```js
+db.books.updateOne(
+    {
+        '_id' : ObjectId("616f6d98e52184190e6f0c7f")
+    },
+    {
+        $set: {
+            'name': "Harry Potter y el prisionero de Azcaban"
+        }
+    }
+)
+```
 
+## Actualizar el documento por name:
+```js
+db.books.updateMany(
+    {
+        'name': "Harry Potter y La Cámara Secrete"
+    },
+    {
+        $set: {
+            'name': "Harry Potter y la Orden del Fénix"
+        }
+    }
+)
+```
+
+## Actualizar y agregar clave a documento:
+```js
+db.books.updateMany(
+    {
+        'name': "Harry Potter y la Orden del Fénix"
+    },
+    {
+        $set: {
+            'name': "Harry Potter y la Orden del Fénix 3.0",
+            'age': 2004
+        }
+    }
+)
+```
 
 
 
