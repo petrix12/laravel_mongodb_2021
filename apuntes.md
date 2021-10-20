@@ -482,9 +482,9 @@
     {
         use HasFactory;
 
-        protected $primaryKey = 'id';
-        protected $fillable = ['id', 'title', 'description'];
-        protected $collection = 'books_collections';
+        protected $primaryKey = '_id';
+        protected $fillable = ['_id', 'title', 'description', 'age'];
+        protected $collection = 'books_collection';
     }
     ```
 3. Commit Video 027:
@@ -493,10 +493,84 @@
     + $ git push -u origin main
 
 ### Video 028. Realizar operaciones CRUD
+1. Modificar la ruta raíz para probar el modelo **Book**:
+    ```php
+    Route::get('/', function () {
+
+        /*** OPERACIONES PRINCIPALES PARA UN CRUD ***/
 
 
+        /*** CREAR (C) ***/
+
+        /* Book::create([
+            'title' => 'Cualquier cosa',
+            'description' => 'Soluciones++'
+        ]); */
+
+
+        /*** BUSCAR (R) ***/
+
+        // Obtener todos los documentos
+        /* $books = Book::all(); */
+
+        // Obtner todos los documentos con la clave title = 'Cualquier cosa'
+        /* $books = Book::where('title','Cualquier cosa')->get(); */
+
+        // Obtner todos los documentos con la clave description no null
+        /* $books = Book::where('title','Cualquier cosa')->whereNotNull('description')->get(); */
+
+        // Obtner todos los documentos con la clave description null
+        /* $books = Book::where('title','Cualquier cosa')->whereNull('description')->get(); */
+
+        // Obtner la consulta SQL
+        /* $books = Book::where('title','Cualquier cosa')->whereNull('description')->toSql(); */
+
+        // Obtener el docomento con _id = 61701f2e59670000c5004b45
+        /* $books = Book::find('61701f2e59670000c5004b45'); */
+
+
+        /*** ACTUALIZAR (U) ***/
+
+        // Actualizar el docomento con _id = 61701f2e59670000c5004b45
+        /* $books = Book::find('61701f2e59670000c5004b45');
+        $books->update([
+            'title' => 'Cualquier cosa 2',
+            'description' => 'Soluciones++ 3',
+            'age' => 2021
+        ]); */
+
+        /*** ELIMINAR (D) ***/
+
+        // Eliminar el docomento con _id = 61701f2e59670000c5004b45
+        /* $books = Book::find('61701f2e59670000c5004b45');
+        $books->delete(); */
+
+
+        /*** OTRAS OPERACIONES ***/
+        // Actualizar un documento y luego incrementar el valor de una clave
+        /* $books = Book::find('6170265f59670000c5004b48');
+        $books->update([
+            'title' => 'Cualquier cosa 2',
+            'description' => 'Soluciones++ 3',
+            'age' => 2021
+        ]);
+        $books = Book::find('6170265f59670000c5004b48')->increment('age');
+        dd(Book::find('6170265f59670000c5004b48')); */
+
+        /* dd($books); */
+
+        return view('welcome');
+    });
+    ```
+2. Commit Video 028:
+    + $ git add .
+    + $ git commit -m "Commit 028: Realizar operaciones CRUD"
+    + $ git push -u origin main
 
 ### Nota 029. Tarea
+
+
+
 ### Nota 030. Operaciones CRUD realizadas
 
 
