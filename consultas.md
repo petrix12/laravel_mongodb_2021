@@ -71,6 +71,8 @@ var book3 = {
 + db.books.insert(book1)            (equivalente a db.books.insertOne(book1))
 + db.books.insert([book2, book3])   (equivalente a db.books.insertMany([book2, book3]))
 
+## Mostrar todos los documentos de la colección **books**:
++ db.books.find()
 
 
 ```js

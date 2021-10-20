@@ -219,18 +219,25 @@
 6. Incluir los documentos **book2** y **book3** en la colección **books**:
     + > db.books.insertMany([book2, book3])
 7. Ejecutar:
-    + db.books.insert(book1)
-    + db.books.insert([book2, book3])
+    + > db.books.insert(book1)
+    + > db.books.insert([book2, book3])
 8. Commit Video 018:
     + $ git add .
     + $ git commit -m "Commit 018: Métodos -insert- para crear documentos/registros"
     + $ git push -u origin main
 
 ### Video 019. Método -find- para buscar documentos/registros y findOne
-
-
+1. Mostrar todos los documentos de la colección **books**:
+    + > db.books.find()
+2. Commit Video 019:
+    + $ git add .
+    + $ git commit -m "Commit 019: Método -find- para buscar documentos/registros y findOne"
+    + $ git push -u origin main
 
 ### Nota 020. Generación del ID
+
+
+
 ### Video 021. Método -find- con parámetros de búsqueda (query) y campos (proyección)
 ### Video 022. Método -update- para actualizar documentos
 ### Video 023. Método -delete- para eliminar documentos
