@@ -1,6 +1,7 @@
 # Crea tus aplicaciones con Laravel y MongoDB
 + [URL del curso en Udemy](https://www.udemy.com/course/crea-tus-aplicaciones-con-laravel-y-mongodb)
-+ [URL del repositorio en GitHub]()
++ [URL del repositorio en GitHub](https://github.com/petrix12/laravel_mongodb_2021.git)
++ [Comando comunes MongoDB](consultas.md)
 
 ## Antes de iniciar:
 1. Crear proyecto en la página de [GitHub](https://github.com) con el nombre: **laravel_mongodb_2021**.
@@ -173,7 +174,7 @@
 
 ### Video 015. Documentación a emplear y pasos a seguir
 + https://docs.mongodb.com/manual
-1. Crear archivo JavaScript **consultas.js** para guardar las consultas que realizaremos a MongoDB.
+1. Crear archivo **consultas.md** para guardar las consultas que realizaremos a MongoDB.
 2. Commit Video 015:
     + $ git add .
     + $ git commit -m "Commit 015: Documentación a emplear y pasos a seguir"
@@ -195,10 +196,18 @@
     + $ git push -u origin main
 
 ### Video 017. Trabajando con las colecciones
-
-
+1. Para ver las colecciones de una base de datos:
+    + > show collections
+2. Iniciar escritura en [consultas.md](consultas.md)
+3. Commit Video 017:
+    + $ git add .
+    + $ git commit -m "Commit 017: Trabajando con las colecciones"
+    + $ git push -u origin main
 
 ### Video 018. Métodos -insert- para crear documentos/registros
+
+
+
 ### Video 019. Método -find- para buscar documentos/registros y findOne
 ### Nota 020. Generación del ID
 ### Video 021. Método -find- con parámetros de búsqueda (query) y campos (proyección)
