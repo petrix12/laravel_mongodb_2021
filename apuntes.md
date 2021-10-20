@@ -641,12 +641,7 @@
     + $ php artisan ui bootstrap --auth
     + $ npm install
     + $ npm run dev
-2. Agregar el CDN del CSS de Bootstrap a la plantilla **resources\views\layouts\app.blade.php**:
-    ```php
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    ```
-3. Commit Video 033:
+2. Commit Video 033:
     + $ git add .
     + $ git commit -m "Commit 033:  Configurar nuestro proyecto con LaravelUI (Bootstrap)"
     + $ git push -u origin main
@@ -668,10 +663,27 @@
     + $ git push -u origin main
 
 ### Video 035. Opcional: Instalar FontAwesome
-
-
++ https://fontawesome.com/
+1. Instalar Font Awesome:
+    + $ npm install --save @fortawesome/fontawesome-free
+2. Incluir los estilos de Font Awesome en **resources\sass\app.scss**:
+    ```scss
+    // Font Awesome
+    @import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+    @import '~@fortawesome/fontawesome-free/scss/brands.scss';
+    @import '~@fortawesome/fontawesome-free/scss/solid.scss';
+    ```
+3. Ejecutar:
+    + $ npm run dev
+4. Commit Video 035:
+    + $ git add .
+    + $ git commit -m "Commit 035: Opcional: Instalar FontAwesome"
+    + $ git push -u origin main
 
 ### Video 036. Registrar un usuario
+
+
+
 ### Video 037. Crear template maestro
 ### Video 038. CRUD: Crear listado de libros
 ### Video 039. CRUD: Crear libros
