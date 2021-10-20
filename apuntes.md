@@ -652,10 +652,25 @@
     + $ git push -u origin main
 
 ### Video 034. Opcional: Usar Bootstrap 5
-
-
++ https://getbootstrap.com/
+1. Eliminar las dependencias: **"bootstrap": "^4.6.0"** y **"jquery": "^3.6"** en **package.json**.
+2. Ejecutar:
+    + $ npm install bootstrap
+3. Modificar **resources\js\app.js**:
+    ```js
+    const bootstrap = require('bootstrap');
+    ```
+4. Ejecutar:
+    + $ npm run dev
+5. Commit Video 034:
+    + $ git add .
+    + $ git commit -m "Commit 034: Opcional: Usar Bootstrap 5"
+    + $ git push -u origin main
 
 ### Video 035. Opcional: Instalar FontAwesome
+
+
+
 ### Video 036. Registrar un usuario
 ### Video 037. Crear template maestro
 ### Video 038. CRUD: Crear listado de libros
