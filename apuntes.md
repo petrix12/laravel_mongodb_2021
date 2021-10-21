@@ -920,10 +920,80 @@
     + $ git push -u origin main
 
 ### Video 041. CRUD: Validaciones
+1. Crear request para validar los datos de los libros:
+    + $ php artisan make:request SaveBook
+2. Programar el nuevo request **app\Http\Requests\SaveBook.php**:
+    ```php
+    ≡
+    class SaveBook extends FormRequest
+    {
+        ≡
+        public function authorize()
+        {
+            return true;
+        }
 
+        ≡
+        public function rules()
+        {
+            return $this->myRules();
+        }
 
+        public function myRules(){
+            return [
+                'title' => 'required|string|max:255',
+                'description' => 'required|string|max:2000',
+                'age' => 'required|integer',
+            ];
+        }
+    }
+    ```
+3. Modificar el método **store** del controlador **app\Http\Controllers\Dashboard\BookController.php**:
+    ```php
+    public function store(SaveBook $request)
+    {
+        Book::create($request->validated());
+        return back()->with('status', 'Libro creado correctamente');
+    }
+    ```
+    + Importar la definición del request **SaveBook**:
+    ```php
+    use App\Http\Requests\SaveBook;
+    ```
+4. Crear plantilla **resources\views\dashboard\partials\errors-form.blade.php**:
+    ```php
+    @if ($errors->any())
+        @foreach ($errors->all() as $e)
+            <div class="alert alert-danger m-b-2">
+                {{ $e }}
+            </div>  
+        @endforeach
+    @endif
+    ```
+5. Modificar vista **resources\views\dashboard\book\create.blade.php** para incluir los mensajes de error:
+    ```php
+    @extends('dashboard.master')
+    @section('content')
+        <div class="mt-3 card">
+            ≡
+            <div class="card-body">
+                @include('dashboard.partials.errors-form')
+                <form action="{{ route('book.store') }}" method="post">
+                    ≡
+                </form>
+            </div>
+        </div>
+    @endsection
+    ```
+6. Commit Video 041:
+    + $ git add .
+    + $ git commit -m "Commit 041: CRUD: Validaciones"
+    + $ git push -u origin main
 
 ### Video 042. CRUD: Editar libros
+
+
+
 ### Video 043. CRUD: Enlaces CRUD en el index
 ### Video 044. CRUD Eliminar libros
 ### Video 045. Algunos detalles en la aplicación

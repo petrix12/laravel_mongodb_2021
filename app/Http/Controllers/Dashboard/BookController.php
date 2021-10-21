@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Book;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SaveBook;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -36,9 +37,9 @@ class BookController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SaveBook $request)
     {
-        Book::create($request->all());
+        Book::create($request->validated());
         return back()->with('status', 'Libro creado correctamente');
     }
 
