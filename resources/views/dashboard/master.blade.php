@@ -11,6 +11,7 @@
 <body>
     @include('dashboard.partials.nav-header-main')
     <div class="container">
+        @include('dashboard.partials.alert-message')
         @yield('content')
     </div>
     <!-- Scripts -->

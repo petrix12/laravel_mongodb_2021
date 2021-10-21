@@ -892,10 +892,37 @@
     + $ git push -u origin main
 
 ### Video 040. CRUD: Mostrar mensaje de éxito
-
-
+1. Crear plantilla **resources\views\dashboard\partials\alert-message.blade.php**:
+    ```php
+    @if (session('status'))
+        <div class="alert alert-success my-2">
+            {{ session('status') }}
+        </div>
+    @endif
+    ```
+2. Modificar plantilla **resources\views\dashboard\master.blade.php** para incluir los mensajes de notificación:
+    ```php
+    ≡
+    <body>
+        ≡
+        <div class="container">
+            @include('dashboard.partials.alert-message')
+            ≡
+        </div>
+        <!-- Scripts -->
+        ≡
+    </body>
+    ≡
+    ```
+3. Commit Video 040:
+    + $ git add .
+    + $ git commit -m "Commit 040: CRUD: Mostrar mensaje de éxito"
+    + $ git push -u origin main
 
 ### Video 041. CRUD: Validaciones
+
+
+
 ### Video 042. CRUD: Editar libros
 ### Video 043. CRUD: Enlaces CRUD en el index
 ### Video 044. CRUD Eliminar libros
