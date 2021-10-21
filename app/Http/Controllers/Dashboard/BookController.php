@@ -75,7 +75,7 @@ class BookController extends Controller
     public function update(SaveBook $request, Book $book)
     {
         $book->update($request->validated());
-        return back()->with('status', 'Libro ' . $book->title . 'actualizado correctamente');
+        return back()->with('status', 'Libro ' . $book->title . ' actualizado correctamente');
     }
 
     /**
@@ -86,6 +86,7 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        $book->delete();
+        return back()->with('status', 'Libro ' . $book->title . ' eliminado correctamente');
     }
 }

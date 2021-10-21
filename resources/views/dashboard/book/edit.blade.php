@@ -1,6 +1,6 @@
 @extends('dashboard.master')
 @section('content')
-    <div class="mt-3 card">
+    <div class="card mt-4">
         <div class="card-header">
             Editar libro: {{ $book->title }}
         </div>

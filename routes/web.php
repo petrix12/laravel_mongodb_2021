@@ -10,4 +10,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('dashboard/book', 'Dashboard\BookController');
+Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard', 'middleware' => 'auth'], function () {
+    Route::resource('book', 'BookController');
+});

@@ -645,9 +645,8 @@
     + $ git push -u origin main
 
 ### Video 034. Opcional: Usar Bootstrap 5
-+ **NOTA**: Para este proyecto no se ejecutaron estos pasos
 + https://getbootstrap.com/
-1. Eliminar las dependencias: **"bootstrap": "^4.6.0"** y **"jquery": "^3.6"** en **package.json**.
+1. Eliminar las dependencias: **"bootstrap": "^4.0.0"** y **"jquery": "^3.2"** en **package.json**.
 2. Ejecutar:
     + $ npm install bootstrap
 3. Modificar **resources\js\app.js**:
@@ -1065,10 +1064,210 @@
     + $ git push -u origin main
 
 ### Video 044. CRUD Eliminar libros
+1. Modificar la vista **resources\views\dashboard\book\index.blade.php** para incluir una ventana modal para eliminar registros:
+    ```php
+    @extends('dashboard.master')
+    @section('content')
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título</th>
+                    <th>Creación</th>
+                    <th>Actualización</th>
+                    <th>Año</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($books as $book)
+                    <tr>
+                        <td>{{ $book->_id }}</td>
+                        <td>{{ $book->title }}</td>
+                        <td>{{ $book->created_at->format('d-m-Y') }}</td>
+                        <td>{{ $book->updated_at->format('d-m-Y') }}</td>
+                        <td>{{ $book->age }}</td>
+                        <td>
+                            <a class="btn btn-sm btn-success text-white" href="{{ route('book.edit', $book->_id) }}">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a 
+                                data-id="{{ $book->_id }}"
+                                data-title="{{ $book->title }}"
+                                class="btn btn-sm btn-danger text-white" 
+                                href="#" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#deleteModal"
+                            >
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+        {{ $books->links() }}
 
+        {{-- Modal --}}
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Eliminar <span></span></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Seguro que quieres eliminar el registro seleccionado?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <form id="formDelete" data-action="{{ route('book.destroy', 0) }}" action="{{ route('book.destroy', 0) }}" method="post">
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        {{-- script Modal --}}
+        <script>
+        var deleteModal = document.getElementById('deleteModal')
+        deleteModal.addEventListener('show.bs.modal', function (event) {
+            // Button that triggered the modal
+            var button = event.relatedTarget
+            // Extract info from data-bs-* attributes
+            var id = button.getAttribute('data-id')
+            var title = button.getAttribute('data-title')
+
+            // Form
+            var action = document.getElementById('formDelete').getAttribute('data-action')
+            action = action.slice(0,-1)
+            document.getElementById('formDelete').setAttribute('action', action + id)
+            
+            // Update the modal's content.
+            var modalTitle = deleteModal.querySelector('.modal-title span')
+
+            modalTitle.textContent = title
+        })
+        </script>
+    @endsection
+    ```
+2. Programar el método **destroy** del controlador **app\Http\Controllers\Dashboard\BookController.php**:
+    ```php
+    public function destroy(Book $book)
+    {
+        $book->delete();
+        return back()->with('status', 'Libro ' . $book->title . ' eliminado correctamente');
+    }
+    ```
+3. Commit Video 044:
+    + $ git add .
+    + $ git commit -m "Commit 044: CRUD Eliminar libros"
+    + $ git push -u origin main
 
 ### Video 045. Algunos detalles en la aplicación
+1. Mejorar la estética de la vista **resources\views\dashboard\book\index.blade.php**:
+    ```php
+    @extends('dashboard.master')
+    @section('content')
+        <div class="card mt-4">
+            <div class="card-header">
+                Lista de libros MongoDB
+            </div>
+            <div class="card-body my-2">
+                <a href="{{ route('book.create') }}" class="btn btn-success text-white">
+                    <i class="fa fa-plus"></i> Crear
+                </a>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            ≡
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ≡
+                    </tbody>
+                </table>
+                {{ $books->links() }}
+            </div>
+        </div>
+
+        {{-- Modal --}}
+        ≡
+
+        {{-- script Modal --}}
+        ≡
+    @endsection
+    ```
+2. Mejorar la estética de la vista **resources\views\dashboard\book\create.blade.php**:
+    ```php
+    @extends('dashboard.master')
+    @section('content')
+        <div class="card mt-4">
+            <div class="card-header">
+                Crear libro
+            </div>
+            <div class="card-body">
+                @include('dashboard.partials.errors-form')
+                <form action="{{ route('book.store') }}" method="post">
+                    @include('dashboard.book._form')
+                    <input type="submit" value="Enviar" class="mt-3 btn btn-success">
+                </form>
+            </div>
+        </div>
+    @endsection
+    ```
+3. Mejorar la estética de la vista **resources\views\dashboard\book\edit.blade.php**:
+    ```php
+    @extends('dashboard.master')
+    @section('content')
+        <div class="card mt-4">
+            <div class="card-header">
+                Editar libro: {{ $book->title }}
+            </div>
+            <div class="card-body">
+                @include('dashboard.partials.errors-form')
+                <form action="{{ route('book.update', $book->_id) }}" method="post">
+                    @method('PUT')
+                    @include('dashboard.book._form')
+                    <input type="submit" value="Actualizar" class="mt-3 btn btn-success">
+                </form>
+            </div>
+        </div>
+    @endsection
+    ```
+4. Autenticar rutas en **routes\web.php**:
+    ```php
+    <?php
+
+    use Illuminate\Support\Facades\Route;
+
+    Route::get('/', function () {
+        return view('welcome');
+    });
+
+    Auth::routes();
+
+    Route::get('/home', 'HomeController@index')->name('home');
+
+    Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard', 'middleware' => 'auth'], function () {
+        Route::resource('book', 'BookController');
+    });
+    ```
+5. En las vistas **resources\views\auth\login.blade.php** y **resources\views\auth\register.blade.php**:
+    + Remmplazar: form-group
+    + Por: mt-3
+
+
+    ```php
+    ```
+6. Commit Video 045:
+    + $ git add .
+    + $ git commit -m "Commit 045: Algunos detalles en la aplicación"
+    + $ git push -u origin main
+
 ### Nota 046. Código fuente
 
 
