@@ -1383,3 +1383,63 @@
         + C:\laragon\bin\php\php-7.4.19-Win32-vc15-x64\php.exe
 11. Ejeuctar la siguiente instrucción para todos aquellos proyectos que requieran de MongoDB:
     + $ composer require mongodb/mongodb
+
+## Deploy del proyecto en Heroku
+1. Crear en la raíz del proyecto el archivo **Procfile** (sin extensión) para elegir un servidor apache en Heroku y también indicarle la ubicación del archivo incial index.php:
+    ```
+    web: vendor/bin/heroku-php-apache2 public/
+    ```
+2. Actualizar repositorio en GitHub.
+
+
+
+
+3. Ingresar a [Heroku](https://dashboard.heroku.com/apps) e ir a **Dashboard**.
+4. Crear un nuevo proyecto en **New > Create new app**
+    + Nombre: laravelmongo
+5. Ir a Deploy y dar clic en GitHub.
+6. Clic en el botón Connect to GitHub e ingresar las credenciales.
+7. Seleccionar el repositorio **pasarela_pago** y presionar el botón **Connect**.
+8. Para tener siempre la ultima actualización de nuestro proyecto se recomienda presionar el botón **Enable Automatic Deploys**.
+9.  Presionar el botón Deploy Branch.
+10. Descargar e instalar [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli).
+12. En la terminal en la raíz del proyecto en local e iniciar sesión en Heroku:
+    + $ heroku login
+13. Víncular con la aplicación de Heroku **paymet**:
+    + $ git remote add heroku git.heroku.com/paymet.git
+        + (git remote set-url Origin git.heroku.com/paymet.git)
+    + $ heroku git:remote -a paymet
+14. Registrar variables de entorno de la aplicación desde la terminal:
+    + $ heroku config:add APP_NAME=PayMet
+    + $ heroku config:add APP_ENV=production
+    + $ heroku config:add APP_KEY=base64:gUVmds1U2u5m126RsiswRYif8dydHe31tUf143J2X58=
+    + $ heroku config:add APP_DEBUG=false
+    + $ heroku config:add APP_URL=https://paymet.herokuapp.com
+    + $ heroku config:add FILESYSTEM_DRIVER=public
+15. Crear base de datos Postgre SQL desde la terminal:
+    + $ heroku addons:create heroku-postgresql:hobby-dev
+    + $ heroku pg:credentials:url
+    + **Nota**: la salida de la última línea de comando nos servirá para configurar las variables de entorno de la base de datos:
+    ```
+    Connection information for default credential.
+    Connection info string:
+    "dbname=*** host=*** port=*** user=*** password=*** sslmode=require"
+    Connection URL:
+    postgres://mmtmzssdyxkfyt:9336263e704b06d0a1ba7c979c426e7d8eb77f3958e4114cea9a21973ba08d84@ec2-35-168-145-180.compute-1.amazonaws.com:5432/dbhkpp3vfen6vd
+    ```
+16. Registrar variables de entorno de la base de datos desde la terminal:
+    + $ heroku config:add DB_CONNECTION=pgsql
+    + $ heroku config:add DB_HOST=ec2-18-235-4-83.compute-1.amazonaws.com
+    + $ heroku config:add DB_PORT=5432
+    + $ heroku config:add DB_DATABASE=db6unq9m90dvkv
+    + $ heroku config:add DB_USERNAME=vcsyvufmsdpbhn
+    + $ heroku config:add DB_PASSWORD=******
+17. Ejecutar migraciones:
+    + $ heroku run bash
+    + ~ $ php artisan migrate --seed
+        + Do you really wish to run this command? (yes/no) [no]: **yes**
+    + ~ $ exit
+18. Salir de Heroku:
+    + $ heroku logout
+19. Desconectar con repositorio Heroku:
+    + $ git remote rm heroku
