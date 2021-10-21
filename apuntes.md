@@ -991,8 +991,44 @@
     + $ git push -u origin main
 
 ### Video 042. CRUD: Editar libros
-
-
+1. Programar el método **edit** del controlador **app\Http\Controllers\Dashboard\BookController.php**:
+    ```php
+    public function edit(Book $book)
+    {
+        return view('dashboard.book.edit', compact('book'));
+    }
+    ```
+2. Programar el método **update** del controlador **app\Http\Controllers\Dashboard\BookController.php**:
+    ```php
+    public function update(SaveBook $request, Book $book)
+    {
+        $book->update($request->validated());
+        return back()->with('status', 'Libro ' . $book->title . 'actualizado correctamente');
+    }
+    ```
+3. Diseñar vista **resources\views\dashboard\book\edit.blade.php**:
+    ```php
+    @extends('dashboard.master')
+    @section('content')
+        <div class="mt-3 card">
+            <div class="card-header">
+                Editar libro: {{ $book->title }}
+            </div>
+            <div class="card-body">
+                @include('dashboard.partials.errors-form')
+                <form action="{{ route('book.update', $book->_id) }}" method="post">
+                    @method('PUT')
+                    @include('dashboard.book._form')
+                    <input type="submit" value="Actualizar" class="mt-3 btn btn-success">
+                </form>
+            </div>
+        </div>
+    @endsection
+    ```
+4. Commit Video 042:
+    + $ git add .
+    + $ git commit -m "Commit 042: CRUD: Editar libros"
+    + $ git push -u origin main
 
 ### Video 043. CRUD: Enlaces CRUD en el index
 ### Video 044. CRUD Eliminar libros

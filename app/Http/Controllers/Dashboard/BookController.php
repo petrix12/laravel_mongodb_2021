@@ -62,7 +62,7 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        //
+        return view('dashboard.book.edit', compact('book'));
     }
 
     /**
@@ -72,9 +72,10 @@ class BookController extends Controller
      * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book)
+    public function update(SaveBook $request, Book $book)
     {
-        //
+        $book->update($request->validated());
+        return back()->with('status', 'Libro ' . $book->title . 'actualizado correctamente');
     }
 
     /**
