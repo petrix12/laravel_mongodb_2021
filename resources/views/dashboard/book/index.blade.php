@@ -19,7 +19,14 @@
                     <td>{{ $book->created_at->format('d-m-Y') }}</td>
                     <td>{{ $book->updated_at->format('d-m-Y') }}</td>
                     <td>{{ $book->age }}</td>
-                    <td></td>
+                    <td>
+                        <a class="btn btn-sm btn-success" href="{{ route('book.edit', $book->_id) }}">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a class="btn btn-sm btn-danger" href="{{ route('book.destroy', $book->_id) }}">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </td>
                 </tr>
             @endforeach
         </tbody>

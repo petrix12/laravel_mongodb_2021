@@ -1031,7 +1031,43 @@
     + $ git push -u origin main
 
 ### Video 043. CRUD: Enlaces CRUD en el index
+1. Implementar las acciones de edición y eliminación en la vista **resources\views\dashboard\book\index.blade.php**:
+    ```php
+    @extends('dashboard.master')
+    @section('content')
+        <table class="table">
+            <thead>
+                ≡
+            </thead>
+            <tbody>
+                @foreach ($books as $book)
+                    <tr>
+                        ≡
+                        <td>{{ $book->age }}</td>
+                        <td>
+                            <a class="btn btn-sm btn-success" href="{{ route('book.edit', $book->_id) }}">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a class="btn btn-sm btn-danger" href="{{ route('book.destroy', $book->_id) }}">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+        ≡
+    @endsection
+    ```
+2. Commit Video 043:
+    + $ git add .
+    + $ git commit -m "Commit 043: CRUD: Enlaces CRUD en el index"
+    + $ git push -u origin main
+
 ### Video 044. CRUD Eliminar libros
+
+
+
 ### Video 045. Algunos detalles en la aplicación
 ### Nota 046. Código fuente
 
