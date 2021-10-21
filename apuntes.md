@@ -1259,16 +1259,25 @@
 5. En las vistas **resources\views\auth\login.blade.php** y **resources\views\auth\register.blade.php**:
     + Remmplazar: form-group
     + Por: mt-3
-
-
-    ```php
-    ```
 6. Commit Video 045:
     + $ git add .
     + $ git commit -m "Commit 045: Algunos detalles en la aplicación"
     + $ git push -u origin main
 
 ### Nota 046. Código fuente
+1. Código fuente: Por favor, no se les olvide de calificar el curso y dejarme una reseña si te ha servido y has aprendiendo; eso me ayuda a llegar a mas personas como tú y dar lo mejor de mí con más material para este curso!
+2. Commit Video 046:
+    + $ git add .
+    + $ git commit -m "Commit 046: Código fuente"
+    + $ git push -u origin main
+
+## Sección 06:
+
+### Video 047. Comparaciones por cantidades y operadores lógicos and/or
+
+
+
+### Nota 048. Código fuente
 
 
 
