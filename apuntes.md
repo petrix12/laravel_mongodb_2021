@@ -839,7 +839,62 @@
     + $ git push -u origin main
 
 ### Video 039. CRUD: Crear libros
+1. Programar el método **create** del controlador **app\Http\Controllers\Dashboard\BookController.php**:
+    ```php
+    public function create()
+    {
+        $book = new Book();
+        return view('dashboard.book.create', compact('book'));
+    }
+    ```
+2. Programar el método **store** del controlador **app\Http\Controllers\Dashboard\BookController.php**:
+    ```php
+    public function store(Request $request)
+    {
+        Book::create($request->all());
+        return back()->with('status', 'Libro creado correctamente');
+    }
+    ```
+3. Diseñar vista **resources\views\dashboard\book\create.blade.php**:
+    ```php
+    @extends('dashboard.master')
+    @section('content')
+        <div class="mt-3 card">
+            <div class="card-header">
+                Crear libro
+            </div>
+            <div class="card-body">
+                <form action="{{ route('book.store') }}" method="post">
+                    @include('dashboard.book._form')
+                    <input type="submit" value="Enviar" class="mt-3 btn btn-success">
+                </form>
+            </div>
+        </div>
+    @endsection   
+    ```
+4. Diseñar formulario para libros **resources\views\dashboard\book\_form.blade.php**:
+    ```php
+    @csrf
+    <label for="title">Título</label>
+    <input name="title" id="title" type="text" class="form-control" value="{{ old('title', $book->title ) }}">
+
+    <label for="age">Año</label>
+    <input name="age" id="age" type="numeric" class="form-control" value="{{ old('age', $book->age ) }}">
+
+    <label for="description">Descripción</label>
+    <textarea name="description" id="description" class="form-control" cols="30" rows="10">
+        {{ old('description', $book->description ) }}
+    </textarea>
+    ```
+5. Commit Video 039:
+    + $ git add .
+    + $ git commit -m "Commit 039: CRUD: Crear libros"
+    + $ git push -u origin main
+
 ### Video 040. CRUD: Mostrar mensaje de éxito
+
+
+
 ### Video 041. CRUD: Validaciones
 ### Video 042. CRUD: Editar libros
 ### Video 043. CRUD: Enlaces CRUD en el index

@@ -26,7 +26,8 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        $book = new Book();
+        return view('dashboard.book.create', compact('book'));
     }
 
     /**
@@ -37,7 +38,8 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Book::create($request->all());
+        return back()->with('status', 'Libro creado correctamente');
     }
 
     /**
