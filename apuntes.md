@@ -1271,7 +1271,7 @@
     + $ git commit -m "Commit 046: Código fuente"
     + $ git push -u origin main
 
-## Sección 06:
+## Sección 06: Operadores Lógicos y de comparación en MongoDB
 
 ### Video 047. Comparaciones por cantidades y operadores lógicos and/or
 1. Abrir una consola de MongoDB:
@@ -1297,10 +1297,23 @@
     + $ git push -u origin main
 
 ### Nota 048. Código fuente
+1. **Código fuente**: Por favor, no se les olvide de calificar el curso y dejarme una reseña si te ha servido y has aprendiendo; eso me ayuda a llegar a mas personas como tú y dar lo mejor de mí con más material para este curso!
+2. Commit Video 0478
+    + $ git add .
+    + $ git commit -m "Commit 048: Código fuente"
+    + $ git push -u origin main
+
+## Sección 07: Relaciones en MongoDB
+
+### Video 049. Documentos embebidos: Definir estructura
 
 
 
-
+### Video 050. Documentos embebidos: Consultas de búsqueda
+### Video 051. Documentos embebidos: Actualizar documentos embebidos
+### Video 052. Documentos embebidos: Eliminar documentos embebidos
+### Video 053. Documentos embebidos: Agregar documentos embebidos
+### Video 054. Código fuente
 
 
     ≡
