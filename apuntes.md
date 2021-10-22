@@ -1481,10 +1481,39 @@
     + $ git push -u origin main
 
 ### Video 053. Documentos embebidos: Agregar documentos embebidos
-
-
+1. Abrir una consola de MongoDB:
+    + $ mongo
+2. Ejecutar las siguientes instrucciones para familiarizarnos con los operadores lógicos:
+    + > use crud
+    + >
+        ```js
+        db.users.updateOne(
+            {
+                "address.phone": "+34 916 34 97 00",
+                "name" : "Andres"
+            },{
+                $push: { 
+                    address: {
+                        country: "Grecia",
+                        dir: "La Bonita, Baruta",
+                        phone: "+34 952 76 08 777" 
+                    } 
+                }
+            }
+        )
+        ```
+3. Cerrar la terminal de MongoDB.
+4. Commit Video 053
+    + $ git add .
+    + $ git commit -m "Commit 053: Documentos embebidos: Agregar documentos embebidos"
+    + $ git push -u origin main
 
 ### Nota 054. Código fuente
+1. mm
+
+
+
+
 
 
     ≡
