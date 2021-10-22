@@ -1412,18 +1412,58 @@
         ]     
     }).pretty()
     ```
-5. Commit Video 050
+5. Cerrar la terminal de MongoDB.
+6. Commit Video 050
     + $ git add .
     + $ git commit -m "Commit 050: Documentos embebidos: Consultas de búsqueda"
     + $ git push -u origin main
 
 ### Video 051. Documentos embebidos: Actualizar documentos embebidos
-
-
+1. Abrir una consola de MongoDB:
+    + $ mongo
+2. Ejecutar las siguientes instrucciones para familiarizarnos con los operadores lógicos:
+    + > use crud
+    + > db.users.find({ "address.phone": "+34 952 76 08 00" }).pretty()
+    + >
+        ```js
+        db.users.updateOne(
+            {
+                "address.phone": "+34 952 76 08 00",
+                "name" : "Andres"
+            },{
+                $set: {
+                    last_name: "Cruz II",
+                    "address.1.country": "México"   /* actualiza el país de la dirección con indice 1 */
+                }
+            }
+        )
+        ```
+    + >
+        ```js
+        db.users.updateOne(
+            {
+                "address.phone": "+34 952 76 08 00",
+                "name" : "Andres"
+            },{
+                $set: {
+                    last_name: "Cruz II",
+                    "address.$.country": "Argentina"   /* actualiza el país de la dirección con indice 1 */
+                }
+            }
+        )
+        ```
+3. Cerrar la terminal de MongoDB.
+4. Commit Video 051
+    + $ git add .
+    + $ git commit -m "Commit 051: Documentos embebidos: Actualizar documentos embebidos"
+    + $ git push -u origin main
 
 ### Video 052. Documentos embebidos: Eliminar documentos embebidos
+
+
+
 ### Video 053. Documentos embebidos: Agregar documentos embebidos
-### Video 054. Código fuente
+### Nota 054. Código fuente
 
 
     ≡
