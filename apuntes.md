@@ -1291,7 +1291,8 @@
         ]);
         ```
     + > db.inventory.find().pretty()
-3. Commit Video 047:
+3. Cerrar la terminal de MongoDB.
+4. Commit Video 047:
     + $ git add .
     + $ git commit -m "Commit 047: Comparaciones por cantidades y operadores lógicos and/or"
     + $ git push -u origin main
@@ -1389,7 +1390,37 @@
     + $ git push -u origin main
 
 ### Video 050. Documentos embebidos: Consultas de búsqueda
+1. Abrir una consola de MongoDB:
+    + $ mongo
+2. Ejecutar las siguientes instrucciones para familiarizarnos con los operadores lógicos:
+    + > use crud
+    + Insertar la estructura de la clase anterior.
+    + > db.users.find()
+3. Buscar los usuarios que en su dirección tenga el código postal de 900:
+    + > db.users.find({"address.postal": 900})
+4. Buscar los usuarios que en su dirección tenga el código postal de 900 ó 150:
+    + > 
+    ```js
+    db.users.find({
+        $or: [
+            {
+                "address.postal": 900
+            },
+            {
+                "address.postal": 150
+            },
+        ]     
+    }).pretty()
+    ```
+5. Commit Video 050
+    + $ git add .
+    + $ git commit -m "Commit 050: Documentos embebidos: Consultas de búsqueda"
+    + $ git push -u origin main
+
 ### Video 051. Documentos embebidos: Actualizar documentos embebidos
+
+
+
 ### Video 052. Documentos embebidos: Eliminar documentos embebidos
 ### Video 053. Documentos embebidos: Agregar documentos embebidos
 ### Video 054. Código fuente
