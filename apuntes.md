@@ -1515,6 +1515,29 @@
     + $ git commit -m "Commit 054: Código fuente"
     + $ git push -u origin main
 
+## Sección 08: Relaciones de uno a uno y uno a muchos MongoDB y Laravel
+
+### Video 055. Introducción
++ **Contenido**: breve explicación de la sección.
+1. Commit Video 055
+    + $ git add .
+    + $ git commit -m "Commit 055: Introducción"
+    + $ git push -u origin main
+
+### Video 056. Tarea: CRUD para las categorías
+
+
+
+### Video 057. Relación HasOne: Uno a Uno con FK
+### Video 058. Relación HasOne: Con documento embebido
+### Video 059. Relaciones de Uno a Muchos y de Muchos a Uno con FK
+### Video 060. Relaciones de Uno a Muchos y de Muchos a Uno con documento embebido
+### Video 061. Tarea y recordatorio
+### Video 062. Guardar categoría de un libro
+### Video 063. Código fuente de la sección
+
+
+
 
 
 
