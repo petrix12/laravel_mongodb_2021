@@ -1509,8 +1509,11 @@
     + $ git push -u origin main
 
 ### Nota 054. Código fuente
-1. mm
-
+1. **Código fuente**: Por favor, no se les olvide de calificar el curso y dejarme una reseña si te ha servido y has aprendiendo; eso me ayuda a llegar a mas personas como tú y dar lo mejor de mí con más material para este curso!
+2. Commit Video 054
+    + $ git add .
+    + $ git commit -m "Commit 054: Código fuente"
+    + $ git push -u origin main
 
 
 
