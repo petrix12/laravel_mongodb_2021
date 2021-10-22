@@ -1459,10 +1459,31 @@
     + $ git push -u origin main
 
 ### Video 052. Documentos embebidos: Eliminar documentos embebidos
-
-
+1. Abrir una consola de MongoDB:
+    + $ mongo
+2. Ejecutar las siguientes instrucciones para familiarizarnos con los operadores lógicos:
+    + > use crud
+    + >
+        ```js
+        db.users.updateOne(
+            {
+                "address.phone": "+34 952 76 08 00",
+                "name" : "Andres"
+            },{
+                $pull: { address: { phone: "+34 952 76 08 00" } }
+            }
+        )
+        ```
+3. Cerrar la terminal de MongoDB.
+4. Commit Video 052
+    + $ git add .
+    + $ git commit -m "Commit 052: Documentos embebidos: Eliminar documentos embebidos"
+    + $ git push -u origin main
 
 ### Video 053. Documentos embebidos: Agregar documentos embebidos
+
+
+
 ### Nota 054. Código fuente
 
 
