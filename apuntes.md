@@ -1274,8 +1274,27 @@
 ## Sección 06:
 
 ### Video 047. Comparaciones por cantidades y operadores lógicos and/or
-
-
+1. Abrir una consola de MongoDB:
+    + $ mongo
+2. Ejecutar las siguientes instrucciones para familiarizarnos con los operadores lógicos:
+    + > use crud
+    + >
+        ```js
+        db.inventory.insertMany([
+            { item: "journal", qty: 25, size: { h: 14, w: 21, uom: "cm" }, status: "A" },
+            { item: "notebook", qty: 50, size: { h: 8.5, w: 11, uom: "in" }, status: "A" },
+            { item: "paper", qty: 100, size: { h: 8.5, w: 11, uom: "in" }, status: "D" },
+            { item: "planner", qty: 75, size: { h: 22.85, w: 30, uom: "cm" }, status: "D" },
+            { item: "postcard", qty: 45, size: { h: 10, w: 15.25, uom: "cm" }, status: "A" },
+            { item: "ps4", qty: 22, size: { h: 60, w: 35, uom: "cm" }, status: "A" },
+            { item: "xbox", qty: 25, size: { h: 64, w: 35, uom: "cm" }, status: "B" },
+        ]);
+        ```
+    + > db.inventory.find().pretty()
+3. Commit Video 047:
+    + $ git add .
+    + $ git commit -m "Commit 047: Comparaciones por cantidades y operadores lógicos and/or"
+    + $ git push -u origin main
 
 ### Nota 048. Código fuente
 
@@ -1390,34 +1409,36 @@
     web: vendor/bin/heroku-php-apache2 public/
     ```
 2. Actualizar repositorio en GitHub.
-
-
-
-
 3. Ingresar a [Heroku](https://dashboard.heroku.com/apps) e ir a **Dashboard**.
 4. Crear un nuevo proyecto en **New > Create new app**
     + Nombre: laravelmongo
 5. Ir a Deploy y dar clic en GitHub.
 6. Clic en el botón Connect to GitHub e ingresar las credenciales.
-7. Seleccionar el repositorio **pasarela_pago** y presionar el botón **Connect**.
+7. Seleccionar el repositorio **laravel_mongodb_2021** y presionar el botón **Connect**.
 8. Para tener siempre la ultima actualización de nuestro proyecto se recomienda presionar el botón **Enable Automatic Deploys**.
-9.  Presionar el botón Deploy Branch.
+9. Presionar el botón Deploy Branch.
 10. Descargar e instalar [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli).
 12. En la terminal en la raíz del proyecto en local e iniciar sesión en Heroku:
     + $ heroku login
 13. Víncular con la aplicación de Heroku **paymet**:
-    + $ git remote add heroku git.heroku.com/paymet.git
-        + (git remote set-url Origin git.heroku.com/paymet.git)
-    + $ heroku git:remote -a paymet
+    + $ git remote add heroku git.heroku.com/laravelmongo.git
+        + (git remote set-url Origin git.heroku.com/laravelmongo.git)
+    + $ heroku git:remote -a laravelmongo
 14. Registrar variables de entorno de la aplicación desde la terminal:
-    + $ heroku config:add APP_NAME=PayMet
+    + $ heroku config:add APP_NAME=LaravelMongo
     + $ heroku config:add APP_ENV=production
-    + $ heroku config:add APP_KEY=base64:gUVmds1U2u5m126RsiswRYif8dydHe31tUf143J2X58=
+    + $ heroku config:add APP_KEY=base64:uj60tvtM5vsuqIkjdkY4dCsyTH3BfhTl3VrGMd9IhAk=
     + $ heroku config:add APP_DEBUG=false
-    + $ heroku config:add APP_URL=https://paymet.herokuapp.com
+    + $ heroku config:add APP_URL=https://laravelmongo.herokuapp.com
     + $ heroku config:add FILESYSTEM_DRIVER=public
+
+
+
+
 15. Crear base de datos Postgre SQL desde la terminal:
-    + $ heroku addons:create heroku-postgresql:hobby-dev
+    <!-- + $ heroku addons:create heroku-postgresql:hobby-dev -->
+    <!-- + $ heroku addons:create heroku-redis:hobby-dev -->
+    <!-- + $ heroku addons:create heroku-mongodb:hobby-dev -->
     + $ heroku pg:credentials:url
     + **Nota**: la salida de la última línea de comando nos servirá para configurar las variables de entorno de la base de datos:
     ```
@@ -1427,8 +1448,11 @@
     Connection URL:
     postgres://mmtmzssdyxkfyt:9336263e704b06d0a1ba7c979c426e7d8eb77f3958e4114cea9a21973ba08d84@ec2-35-168-145-180.compute-1.amazonaws.com:5432/dbhkpp3vfen6vd
     ```
+
+
+
 16. Registrar variables de entorno de la base de datos desde la terminal:
-    + $ heroku config:add DB_CONNECTION=pgsql
+    + $ heroku config:add DB_CONNECTION=mongodb
     + $ heroku config:add DB_HOST=ec2-18-235-4-83.compute-1.amazonaws.com
     + $ heroku config:add DB_PORT=5432
     + $ heroku config:add DB_DATABASE=db6unq9m90dvkv
@@ -1443,3 +1467,8 @@
     + $ heroku logout
 19. Desconectar con repositorio Heroku:
     + $ git remote rm heroku
+
+Username: petrix
+Password: xiphos333
+
+https://downloads.mongodb.com/compass/mongosh-1.1.0-win32-x64.zip
