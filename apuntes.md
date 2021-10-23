@@ -1528,6 +1528,11 @@
 
 
 
+1. Commit Video 056
+    + $ git add .
+    + $ git commit -m "Commit 056: Tarea: CRUD para las categorías"
+    + $ git push -u origin main
+
 ### Video 057. Relación HasOne: Uno a Uno con FK
 ### Video 058. Relación HasOne: Con documento embebido
 ### Video 059. Relaciones de Uno a Muchos y de Muchos a Uno con FK
@@ -1642,6 +1647,9 @@
 11. Ejeuctar la siguiente instrucción para todos aquellos proyectos que requieran de MongoDB:
     + $ composer require mongodb/mongodb
 
+## Crear base de datos en MongoDB Atlas
+1. mmmm
+
 ## Deploy del proyecto en Heroku
 1. Crear en la raíz del proyecto el archivo **Procfile** (sin extensión) para elegir un servidor apache en Heroku y también indicarle la ubicación del archivo incial index.php:
     ```
@@ -1673,41 +1681,39 @@
 
 
 
-
-15. Crear base de datos Postgre SQL desde la terminal:
-    <!-- + $ heroku addons:create heroku-postgresql:hobby-dev -->
-    <!-- + $ heroku addons:create heroku-redis:hobby-dev -->
-    <!-- + $ heroku addons:create heroku-mongodb:hobby-dev -->
-    + $ heroku pg:credentials:url
-    + **Nota**: la salida de la última línea de comando nos servirá para configurar las variables de entorno de la base de datos:
-    ```
-    Connection information for default credential.
-    Connection info string:
-    "dbname=*** host=*** port=*** user=*** password=*** sslmode=require"
-    Connection URL:
-    postgres://mmtmzssdyxkfyt:9336263e704b06d0a1ba7c979c426e7d8eb77f3958e4114cea9a21973ba08d84@ec2-35-168-145-180.compute-1.amazonaws.com:5432/dbhkpp3vfen6vd
-    ```
-
-
-
-16. Registrar variables de entorno de la base de datos desde la terminal:
+15. Registrar variables de entorno de la base de datos desde la terminal:
     + $ heroku config:add DB_CONNECTION=mongodb
-    + $ heroku config:add DB_HOST=ec2-18-235-4-83.compute-1.amazonaws.com
-    + $ heroku config:add DB_PORT=5432
-    + $ heroku config:add DB_DATABASE=db6unq9m90dvkv
-    + $ heroku config:add DB_USERNAME=vcsyvufmsdpbhn
-    + $ heroku config:add DB_PASSWORD=******
-17. Ejecutar migraciones:
-    + $ heroku run bash
-    + ~ $ php artisan migrate --seed
-        + Do you really wish to run this command? (yes/no) [no]: **yes**
-    + ~ $ exit
-18. Salir de Heroku:
+    + $ heroku config:add DB_DSN="mongodb+srv://petrix:xiphos333@cluster0.7y5of.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+    + $ heroku config:add DB_PORT=27017
+    + $ heroku config:add DB_DATABASE=laramongo
+    + $ heroku config:add DB_USERNAME=petrix
+    + $ heroku config:add DB_PASSWORD=xiphos333
+16. Salir de Heroku:
     + $ heroku logout
-19. Desconectar con repositorio Heroku:
+18. Desconectar con repositorio Heroku:
     + $ git remote rm heroku
 
 Username: petrix
 Password: xiphos333
 
 https://downloads.mongodb.com/compass/mongosh-1.1.0-win32-x64.zip
+
+
+heroku config:add DB_DSN="mongodb+srv://petrix:xiphos333@cluster0.hrqzg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+
+DB_CONNECTION=mongodb
+DB_HOST=127.0.0.1
+DB_PORT=27017
+DB_DATABASE=laramongo
+DB_USERNAME=
+DB_PASSWORD=
+
+DB_CONNECTION=mongodb
+DB_DSN=mongodb+srv://petrix:xiphos333@cluster0.hrqzg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+DB_PORT=27017
+DB_DATABASE=laramongo
+DB_USERNAME=petrix
+DB_PASSWORD=xiphos333
+
+mongodb+srv://petrix:<password>@cluster0.hrqzg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+host
