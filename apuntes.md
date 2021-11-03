@@ -1384,7 +1384,7 @@
         [user1, user2, user3, user4, user5]
     );
     ```
-2. Commit Video 049
+2. Commit Video 049:
     + $ git add .
     + $ git commit -m "Commit 049: Documentos embebidos: Definir estructura"
     + $ git push -u origin main
@@ -1413,7 +1413,7 @@
     }).pretty()
     ```
 5. Cerrar la terminal de MongoDB.
-6. Commit Video 050
+6. Commit Video 050:
     + $ git add .
     + $ git commit -m "Commit 050: Documentos embebidos: Consultas de búsqueda"
     + $ git push -u origin main
@@ -1453,7 +1453,7 @@
         )
         ```
 3. Cerrar la terminal de MongoDB.
-4. Commit Video 051
+4. Commit Video 051:
     + $ git add .
     + $ git commit -m "Commit 051: Documentos embebidos: Actualizar documentos embebidos"
     + $ git push -u origin main
@@ -1475,7 +1475,7 @@
         )
         ```
 3. Cerrar la terminal de MongoDB.
-4. Commit Video 052
+4. Commit Video 052:
     + $ git add .
     + $ git commit -m "Commit 052: Documentos embebidos: Eliminar documentos embebidos"
     + $ git push -u origin main
@@ -1503,14 +1503,14 @@
         )
         ```
 3. Cerrar la terminal de MongoDB.
-4. Commit Video 053
+4. Commit Video 053:
     + $ git add .
     + $ git commit -m "Commit 053: Documentos embebidos: Agregar documentos embebidos"
     + $ git push -u origin main
 
 ### Nota 054. Código fuente
 1. **Código fuente**: Por favor, no se les olvide de calificar el curso y dejarme una reseña si te ha servido y has aprendiendo; eso me ayuda a llegar a mas personas como tú y dar lo mejor de mí con más material para este curso!
-2. Commit Video 054
+2. Commit Video 054:
     + $ git add .
     + $ git commit -m "Commit 054: Código fuente"
     + $ git push -u origin main
@@ -1519,7 +1519,7 @@
 
 ### Video 055. Introducción
 + **Contenido**: breve explicación de la sección.
-1. Commit Video 055
+1. Commit Video 055:
     + $ git add .
     + $ git commit -m "Commit 055: Introducción"
     + $ git push -u origin main
@@ -1822,15 +1822,15 @@
         }
     }
     ```
-9. Commit Video 056
+9. Commit Video 056:
     + $ git add .
     + $ git commit -m "Commit 056: Tarea: CRUD para las categorías"
     + $ git push -u origin main
 
 ### Video 057. Relación HasOne: Uno a Uno con FK
-1. Crear relación **1:1 Book - Category** en el modelo **app\Book.php**:
+1. Crear relación **1:1 Category - Book** en el modelo **app\Book.php**:
     ```php
-    // Relación 1:1 Book - Category
+    // Relación 1:1 Category - Book
     public function category(){
         return $this->hasOne(Category::class);
     }
@@ -1861,20 +1861,12 @@
         return view('dashboard.book.index', compact('books'));
     }
     ```
-4. Commit Video 057
+4. Commit Video 057:
     + $ git add .
     + $ git commit -m "Commit 057: Relación HasOne: Uno a Uno con FK"
     + $ git push -u origin main
 
 ### Video 058. Relación HasOne: Con documento embebido
-
-
-4. Commit Video 058
-    + $ git add .
-    + $ git commit -m "Commit 058: Relación HasOne: Con documento embebido"
-    + $ git push -u origin main
-
-### Video 059. Relaciones de Uno a Muchos y de Muchos a Uno con FK
 1. Crear método **testhasOneEmbedded** en el controlador **app\Http\Controllers\Dashboard\BookController.php** para probar la relación:
     ```php
     // Tipo documento embebido
@@ -1904,7 +1896,7 @@
         protected $fillable = ['_id', 'title', 'description', 'age', 'category'];
         protected $collection = 'books_collection';
 
-        // Relación 1:1 Book - Category
+        // Relación 1:1 Category - Book
         /* public function category(){
             return $this->hasOne(Category::class);
         } */
@@ -1920,16 +1912,103 @@
         return view('dashboard.book.index', compact('books'));
     }
     ```
-4. Commit Video 059
+4. Commit Video 058:
+    + $ git add .
+    + $ git commit -m "Commit 058: Relación HasOne: Con documento embebido"
+    + $ git push -u origin main
+
+### Video 059. Relaciones de Uno a Muchos y de Muchos a Uno con FK
++ https://github.com/jenssegers/laravel-mongodb/tree/develop#relationships
++ https://github.com/jenssegers/laravel-mongodb/issues/1974#issuecomment-592859508
+1. Modificar el modelo **app\Book.php**:
+    ```php
+    <?php
+
+    namespace App;
+
+    /* use Illuminate\Database\Eloquent\Model; */
+    use Jenssegers\Mongodb\Eloquent\Model;
+
+    class Book extends Model
+    {
+        protected $primaryKey = '_id';
+        protected $fillable = ['_id', 'title', 'description', 'age'/* , 'category' */];
+        protected $collection = 'books_collection';
+
+        // Relación 1:1 Category - Book
+        /* public function category(){
+            return $this->hasOne(Category::class);
+        } */
+
+        // Relación 1:n Category - Book
+        public function category(){
+            return $this->belongsTo(Category::class);
+        }
+    }
+    ```
+2. Modificar el modelo **app\Category.php**:
+    ```php
+    <?php
+
+    namespace App;
+
+    /* use Illuminate\Database\Eloquent\Model; */
+    use Jenssegers\Mongodb\Eloquent\Model;
+
+    class Category extends Model
+    {
+        protected $primaryKey = '_id';
+        protected $fillable = ['_id', 'title'];
+        protected $collection = 'categories_collection';
+
+        // Relación inversa 1:n Category - 
+        public function books(){
+            return $this->hasMany(Book::class);
+        }
+    }
+    ```
+3. Crear método **testHasManyFK** en el controlador **app\Http\Controllers\Dashboard\BookController.php** para probar la relación HasMany:
+    ```php
+    // Métodos para hacer pruebas con relación hasMany
+    // Tipo clave foránea
+    private function testHasManyFK(){
+        // _id book: 6174a0164fa7d063b431b722
+        $book = Book::find('6174a0164fa7d063b431b722');
+        $category = Category::first();
+        // dd($book->category);
+        // $book->category()->save($category); /* NO VA A FUNCIONAR */
+
+        $category->books()->save($book);
+        dd($category->books);
+    }
+    ```
+4. Probar método **testHasManyFK** con el método **index** del controlador **app\Http\Controllers\Dashboard\BookController.php** y luego comentar la invocación al método:
+    ```php
+    public function index()
+    {
+        // $this->testhasOne();
+        // $this->testhasOneEmbedded();
+        $this->testHasManyFK();
+        $books = Book::orderBy('created_at', 'desc')->paginate(10);
+        return view('dashboard.book.index', compact('books'));
+    }
+    ```
+5. Commit Video 059:
     + $ git add .
     + $ git commit -m "Commit 059: Relaciones de Uno a Muchos y de Muchos a Uno con FK"
     + $ git push -u origin main
 
 ### Video 060. Relaciones de Uno a Muchos y de Muchos a Uno con documento embebido
 
-
+5. Commit Video 060:
+    + $ git add .
+    + $ git commit -m "Commit 060: Relaciones de Uno a Muchos y de Muchos a Uno con documento embebido"
+    + $ git push -u origin main
 
 ### Video 061. Tarea y recordatorio
+
+
+
 ### Video 062. Guardar categoría de un libro
 ### Video 063. Código fuente de la sección
 

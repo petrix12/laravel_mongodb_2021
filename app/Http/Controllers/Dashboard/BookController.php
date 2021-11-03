@@ -18,7 +18,8 @@ class BookController extends Controller
     public function index()
     {
         // $this->testhasOne();
-        $this->testhasOneEmbedded();
+        // $this->testhasOneEmbedded();
+        $this->testHasManyFK();
         $books = Book::orderBy('created_at', 'desc')->paginate(10);
         return view('dashboard.book.index', compact('books'));
     }
@@ -114,5 +115,18 @@ class BookController extends Controller
         $book->save();
 
         dd($book->category);
+    }
+
+    // Métodos para hacer pruebas con relación hasMany
+    // Tipo clave foránea
+    private function testHasManyFK(){
+        // _id book: 6174a0164fa7d063b431b722
+        $book = Book::find('6174a0164fa7d063b431b722');
+        $category = Category::first();
+        // dd($book->category);
+        // $book->category()->save($category); /* NO VA A FUNCIONAR */
+
+        $category->books()->save($book);
+        dd($category->books);
     }
 }
