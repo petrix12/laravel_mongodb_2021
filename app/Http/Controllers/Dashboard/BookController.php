@@ -18,6 +18,7 @@ class BookController extends Controller
     public function index()
     {
         // $this->testhasOne();
+        $this->testhasOneEmbedded();
         $books = Book::orderBy('created_at', 'desc')->paginate(10);
         return view('dashboard.book.index', compact('books'));
     }
@@ -92,14 +93,25 @@ class BookController extends Controller
         return back()->with('status', 'Libro ' . $book->title . ' eliminado correctamente');
     }
 
-    // Otros métodos
-
-    // Método para hacer pruebas con relación hasOne
-    private function testhasOne(){
+    // Métodos para hacer pruebas con relación hasOne
+    // Tipo clave foránea
+    private function testhasOneFK(){
         // _id book: 618284129a5a00006b004f58
         $book = Book::find('618284129a5a00006b004f58');
         $category = Category::first();
         $book->category()->save($category);
+
+        dd($book->category);
+    }
+
+    // Tipo documento embebido
+    private function testhasOneEmbedded(){
+        // _id book: 618284129a5a00006b004f58
+        $book = Book::find('618284129a5a00006b004f58');
+        $category = Category::first()->ToArray();
+
+        $book->category = $category;
+        $book->save();
 
         dd($book->category);
     }

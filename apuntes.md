@@ -1838,7 +1838,8 @@
 2. Crear método **testhasOne** en el controlador **app\Http\Controllers\Dashboard\BookController.php** para probar la relación creada en el paso anterior:
     ```php
     // Método para hacer pruebas con relación hasOne
-    private function testhasOne(){
+    // Tipo clave foránea
+    private function testhasOneFK(){
         // _id book: 618284129a5a00006b004f58
         $book = Book::find('618284129a5a00006b004f58');
         $category = Category::first();
@@ -1868,9 +1869,66 @@
 ### Video 058. Relación HasOne: Con documento embebido
 
 
+4. Commit Video 058
+    + $ git add .
+    + $ git commit -m "Commit 058: Relación HasOne: Con documento embebido"
+    + $ git push -u origin main
 
 ### Video 059. Relaciones de Uno a Muchos y de Muchos a Uno con FK
+1. Crear método **testhasOneEmbedded** en el controlador **app\Http\Controllers\Dashboard\BookController.php** para probar la relación:
+    ```php
+    // Tipo documento embebido
+    private function testhasOneEmbedded(){
+        // _id book: 618284129a5a00006b004f58
+        $book = Book::find('618284129a5a00006b004f58');
+        $category = Category::first()->ToArray();
+
+        $book->category = $category;
+        $book->save();
+
+        dd($book->category);
+    }
+    ```
+2. Modficar el modelo **app\Book.php**:
+    ```php
+    <?php
+
+    namespace App;
+
+    /* use Illuminate\Database\Eloquent\Model; */
+    use Jenssegers\Mongodb\Eloquent\Model;
+
+    class Book extends Model
+    {
+        protected $primaryKey = '_id';
+        protected $fillable = ['_id', 'title', 'description', 'age', 'category'];
+        protected $collection = 'books_collection';
+
+        // Relación 1:1 Book - Category
+        /* public function category(){
+            return $this->hasOne(Category::class);
+        } */
+    }
+    ```
+3. Probar método **testhasOneEmbedded** con el método **index** del controlador **app\Http\Controllers\Dashboard\BookController.php** y luego comentar la invocación al método:
+    ```php
+    public function index()
+    {
+        // $this->testhasOne();
+        // $this->testhasOneEmbedded();
+        $books = Book::orderBy('created_at', 'desc')->paginate(10);
+        return view('dashboard.book.index', compact('books'));
+    }
+    ```
+4. Commit Video 059
+    + $ git add .
+    + $ git commit -m "Commit 059: Relaciones de Uno a Muchos y de Muchos a Uno con FK"
+    + $ git push -u origin main
+
 ### Video 060. Relaciones de Uno a Muchos y de Muchos a Uno con documento embebido
+
+
+
 ### Video 061. Tarea y recordatorio
 ### Video 062. Guardar categoría de un libro
 ### Video 063. Código fuente de la sección
