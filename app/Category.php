@@ -12,7 +12,7 @@ class Category extends Model
     protected $collection = 'categories_collection';
 
     // Relación inversa 1:n Category - 
-    /* public function books(){
+    public function books(){
         return $this->hasMany(Book::class);
-    } */
+    }
 }

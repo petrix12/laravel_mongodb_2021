@@ -33,7 +33,8 @@ class BookController extends Controller
     public function create()
     {
         $book = new Book();
-        return view('dashboard.book.create', compact('book'));
+        $categories = Category::pluck('_id', 'title');
+        return view('dashboard.book.create', compact('book', 'categories'));
     }
 
     /**
@@ -67,7 +68,8 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        return view('dashboard.book.edit', compact('book'));
+        $categories = Category::pluck('_id', 'title');
+        return view('dashboard.book.edit', compact('book', 'categories'));
     }
 
     /**

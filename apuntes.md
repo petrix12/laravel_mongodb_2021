@@ -2087,10 +2087,98 @@
     + $ git push -u origin main
 
 ### Video 062. Guardar categoría de un libro
+1. Modificar el modelo **app\Category.php**:
+    ```php
+    <?php
 
+    namespace App;
 
+    /* use Illuminate\Database\Eloquent\Model; */
+    use Jenssegers\Mongodb\Eloquent\Model;
 
-5. Commit Video 062:
+    class Category extends Model
+    {
+        protected $primaryKey = '_id';
+        protected $fillable = ['_id', 'title'];
+        protected $collection = 'categories_collection';
+
+        // Relación inversa 1:n Category - 
+        public function books(){
+            return $this->hasMany(Book::class);
+        }
+    }
+    ```
+1. Modificar el modelo **app\Book.php**:
+    ```php
+    <?php
+
+    namespace App;
+
+    /* use Illuminate\Database\Eloquent\Model; */
+    use Jenssegers\Mongodb\Eloquent\Model;
+
+    class Book extends Model
+    {
+        protected $primaryKey = '_id';
+        protected $fillable = ['_id', 'title', 'description', 'age', 'category_id'];
+        protected $collection = 'books_collection';
+
+        // Relación 1:n Category - Book
+        public function category(){
+            return $this->belongsTo(Category::class);
+        }
+    }
+    ```
+2. Reprogramar el método **create** del controlador **app\Http\Controllers\Dashboard\BookController.php**:
+    ```php
+    public function create()
+    {
+        $book = new Book();
+        $categories = Category::pluck('_id', 'title');
+        return view('dashboard.book.create', compact('book', 'categories'));
+    }
+    ```
+3. Reprogramar el método **edit** del controlador **app\Http\Controllers\Dashboard\BookController.php**:
+    ```php
+    public function edit(Book $book)
+    {
+        $categories = Category::pluck('_id', 'title');
+        return view('dashboard.book.edit', compact('book', 'categories'));
+    }
+    ```
+4. Modificar la vista **resources\views\dashboard\book\_form.blade.php**:
+    ```php
+    @csrf
+    <label for="title">Título</label>
+    <input name="title" id="title" type="text" class="form-control" value="{{ old('title', $book->title ) }}">
+
+    <label for="age">Año</label>
+    <input name="age" id="age" type="numeric" class="form-control" value="{{ old('age', $book->age ) }}">
+
+    <label for="category_id">Categoría</label>
+    <select name="category_id" id="category_id" class="form-control">
+        @foreach ($categories as $title => $id)
+            <option {{ $book->category_id == $id ? 'selected' : '' }} value="{{ $id }}">{{ $title }}</option>
+        @endforeach
+    </select>
+
+    <label for="description">Descripción</label>
+    <textarea name="description" id="description" class="form-control" cols="30" rows="10">
+        {{ old('description', $book->description ) }}
+    </textarea>
+    ```
+5. Modificar el método **myRules** del request **app\Http\Requests\SaveBook.php**:
+    ```php
+    public function myRules(){
+        return [
+            'title' => 'required|string|max:255',
+            'description' => 'required|string|max:2000',
+            'category_id' => 'required',
+            'age' => 'required|integer',
+        ];
+    }
+    ```
+6. Commit Video 062:
     + $ git add .
     + $ git commit -m "Commit 062: Guardar categoría de un libro"
     + $ git push -u origin main
