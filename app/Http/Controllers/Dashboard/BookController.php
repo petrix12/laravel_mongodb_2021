@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Book;
+use App\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SaveBook;
 use Illuminate\Http\Request;
@@ -16,6 +17,7 @@ class BookController extends Controller
      */
     public function index()
     {
+        // $this->testhasOne();
         $books = Book::orderBy('created_at', 'desc')->paginate(10);
         return view('dashboard.book.index', compact('books'));
     }
@@ -88,5 +90,17 @@ class BookController extends Controller
     {
         $book->delete();
         return back()->with('status', 'Libro ' . $book->title . ' eliminado correctamente');
+    }
+
+    // Otros métodos
+
+    // Método para hacer pruebas con relación hasOne
+    private function testhasOne(){
+        // _id book: 618284129a5a00006b004f58
+        $book = Book::find('618284129a5a00006b004f58');
+        $category = Category::first();
+        $book->category()->save($category);
+
+        dd($book->category);
     }
 }

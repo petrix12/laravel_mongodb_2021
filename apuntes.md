@@ -1828,7 +1828,47 @@
     + $ git push -u origin main
 
 ### Video 057. Relación HasOne: Uno a Uno con FK
+1. Crear relación **1:1 Book - Category** en el modelo **app\Book.php**:
+    ```php
+    // Relación 1:1 Book - Category
+    public function category(){
+        return $this->hasOne(Category::class);
+    }
+    ```
+2. Crear método **testhasOne** en el controlador **app\Http\Controllers\Dashboard\BookController.php** para probar la relación creada en el paso anterior:
+    ```php
+    // Método para hacer pruebas con relación hasOne
+    private function testhasOne(){
+        // _id book: 618284129a5a00006b004f58
+        $book = Book::find('618284129a5a00006b004f58');
+        $category = Category::first();
+        $book->category()->save($category);
+
+        dd($book->category);
+    }
+    ```
+    + Importar la definición del modelo **Category**:
+    ```php
+    use App\Category;
+    ```
+3. Probar método **testhasOne** con el método **index** del controlador **app\Http\Controllers\Dashboard\BookController.php** y luego comentar la invocación al método:
+    ```php
+    public function index()
+    {
+        // $this->testhasOne();
+        $books = Book::orderBy('created_at', 'desc')->paginate(10);
+        return view('dashboard.book.index', compact('books'));
+    }
+    ```
+4. Commit Video 057
+    + $ git add .
+    + $ git commit -m "Commit 057: Relación HasOne: Uno a Uno con FK"
+    + $ git push -u origin main
+
 ### Video 058. Relación HasOne: Con documento embebido
+
+
+
 ### Video 059. Relaciones de Uno a Muchos y de Muchos a Uno con FK
 ### Video 060. Relaciones de Uno a Muchos y de Muchos a Uno con documento embebido
 ### Video 061. Tarea y recordatorio
