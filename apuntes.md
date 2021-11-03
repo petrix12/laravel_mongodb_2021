@@ -1525,10 +1525,304 @@
     + $ git push -u origin main
 
 ### Video 056. Tarea: CRUD para las categorías
+1. Crear modelo manualmente **app\Category.php**:
+    ```php
+    <?php
 
+    namespace App;
 
+    /* use Illuminate\Database\Eloquent\Model; */
+    use Jenssegers\Mongodb\Eloquent\Model;
 
-1. Commit Video 056
+    class Category extends Model
+    {
+        protected $primaryKey = '_id';
+        protected $fillable = ['_id', 'title'];
+        protected $collection = 'categories_collection';
+    }
+    ```
+2. Crear plantilla **resources\views\dashboard\category\_form.blade.php**:
+    ```php
+    @csrf
+    <label for="title">Título</label>
+    <input name="title" id="title" type="text" class="form-control" value="{{ old('title', $category->title ) }}">
+    ```
+3. Modificar vista **resources\views\dashboard\category\create.blade.php**:
+    ```php
+    @extends('dashboard.master')
+    @section('content')
+        <div class="card mt-4">
+            <div class="card-header">
+                Crear categoría
+            </div>
+            <div class="card-body">
+                @include('dashboard.partials.errors-form')
+                <form action="{{ route('category.store') }}" method="post">
+                    @include('dashboard.category._form')
+                    <input type="submit" value="Enviar" class="mt-3 btn btn-success">
+                </form>
+            </div>
+        </div>
+    @endsection
+    ```
+4. Modificar vista **resources\views\dashboard\category\edit.blade.php**:
+    ```php
+    @extends('dashboard.master')
+    @section('content')
+        <div class="card mt-4">
+            <div class="card-header">
+                Editar categoría: {{ $category->title }}
+            </div>
+            <div class="card-body">
+                @include('dashboard.partials.errors-form')
+                <form action="{{ route('category.update', $category->_id) }}" method="post">
+                    @method('PUT')
+                    @include('dashboard.category._form')
+                    <input type="submit" value="Actualizar" class="mt-3 btn btn-success">
+                </form>
+            </div>
+        </div>
+    @endsection
+    ```
+5. Modificar vista **resources\views\dashboard\category\index.blade.php**:
+    ```php
+    @extends('dashboard.master')
+    @section('content')
+        <div class="card mt-4">
+            <div class="card-header">
+                Lista de categorías MongoDB
+            </div>
+            <div class="card-body my-2">
+                <a href="{{ route('category.create') }}" class="btn btn-success text-white">
+                    <i class="fa fa-plus"></i> Crear
+                </a>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Título</th>
+                            <th>Creación</th>
+                            <th>Actualización</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($categories as $category)
+                            <tr>
+                                <td>{{ $category->_id }}</td>
+                                <td>{{ $category->title }}</td>
+                                <td>{{ $category->created_at->format('d-m-Y') }}</td>
+                                <td>{{ $category->updated_at->format('d-m-Y') }}</td>
+                                <td>
+                                    <a class="btn btn-sm btn-success text-white" href="{{ route('category.edit', $category->_id) }}">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a 
+                                        data-id="{{ $category->_id }}"
+                                        data-title="{{ $category->title }}"
+                                        class="btn btn-sm btn-danger text-white" 
+                                        href="#" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#deleteModal"
+                                    >
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                {{ $categories->links() }}
+            </div>
+        </div>
+
+        {{-- Modal --}}
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Eliminar <span></span></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Seguro que quieres eliminar el registro seleccionado?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <form id="formDelete" data-action="{{ route('category.destroy', 0) }}" action="{{ route('category.destroy', 0) }}" method="post">
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- script Modal --}}
+        <script>
+        var deleteModal = document.getElementById('deleteModal')
+        deleteModal.addEventListener('show.bs.modal', function (event) {
+            // Button that triggered the modal
+            var button = event.relatedTarget
+            // Extract info from data-bs-* attributes
+            var id = button.getAttribute('data-id')
+            var title = button.getAttribute('data-title')
+
+            // Form
+            var action = document.getElementById('formDelete').getAttribute('data-action')
+            action = action.slice(0,-1)
+            document.getElementById('formDelete').setAttribute('action', action + id)
+            
+            // Update the modal's content.
+            var modalTitle = deleteModal.querySelector('.modal-title span')
+
+            modalTitle.textContent = title
+        })
+        </script>
+    @endsection
+    ```
+6. Crear ruta para categorías en **routes\web.php**:
+    ```php
+    ≡
+    Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard', 'middleware' => 'auth'], function () {
+        ≡
+        Route::resource('category', 'CategoryController');
+    });
+    ```
+7. Crear request manualmente **app\Http\Requests\SaveCategory.php**:
+    ```php
+    <?php
+
+    namespace App\Http\Requests;
+
+    use Illuminate\Foundation\Http\FormRequest;
+
+    class SaveCategory extends FormRequest
+    {
+        /**
+        * Determine if the user is authorized to make this request.
+        *
+        * @return bool
+        */
+        public function authorize()
+        {
+            return true;
+        }
+
+        /**
+        * Get the validation rules that apply to the request.
+        *
+        * @return array
+        */
+        public function rules()
+        {
+            return $this->myRules();
+        }
+
+        public function myRules(){
+            return [
+                'title' => 'required|string|max:255',
+            ];
+        }
+    }
+    ```
+8. Crear controlador manualmente **app\Http\Controllers\Dashboard\CategoryController.php**:
+    ```php
+    <?php
+
+    namespace App\Http\Controllers\Dashboard;
+
+    use App\Category;
+    use App\Http\Controllers\Controller;
+    use App\Http\Requests\SaveCategory;
+    use Illuminate\Http\Request;
+
+    class CategoryController extends Controller
+    {
+        /**
+        * Display a listing of the resource.
+        *
+        * @return \Illuminate\Http\Response
+        */
+        public function index()
+        {
+            $categories = Category::orderBy('created_at', 'desc')->paginate(10);
+            return view('dashboard.category.index', compact('categories'));
+        }
+
+        /**
+        * Show the form for creating a new resource.
+        *
+        * @return \Illuminate\Http\Response
+        */
+        public function create()
+        {
+            $category = new Category();
+            return view('dashboard.category.create', compact('category'));
+        }
+
+        /**
+        * Store a newly created resource in storage.
+        *
+        * @param  \Illuminate\Http\Request  $request
+        * @return \Illuminate\Http\Response
+        */
+        public function store(SaveCategory $request)
+        {
+            Category::create($request->validated());
+            return back()->with('status', 'Categoría creada correctamente');
+        }
+
+        /**
+        * Display the specified resource.
+        *
+        * @param  \App\Categoy  $category
+        * @return \Illuminate\Http\Response
+        */
+        public function show(Category $category)
+        {
+            //
+        }
+
+        /**
+        * Show the form for editing the specified resource.
+        *
+        * @param  \App\Categoy  $category
+        * @return \Illuminate\Http\Response
+        */
+        public function edit(Category $category)
+        {
+            return view('dashboard.category.edit', compact('category'));
+        }
+
+        /**
+        * Update the specified resource in storage.
+        *
+        * @param  \Illuminate\Http\Request  $request
+        * @param  \App\Categoy  $category
+        * @return \Illuminate\Http\Response
+        */
+        public function update(SaveCategory $request, Category $category)
+        {
+            $category->update($request->validated());
+            return back()->with('status', 'Categoría ' . $category->title . ' actualizada correctamente');
+        }
+
+        /**
+        * Remove the specified resource from storage.
+        *
+        * @param  \App\Categoy  $category
+        * @return \Illuminate\Http\Response
+        */
+        public function destroy(Category $category)
+        {
+            $category->delete();
+            return back()->with('status', 'Categoría ' . $category->title . ' eliminada correctamente');
+        }
+    }
+    ```
+9. Commit Video 056
     + $ git add .
     + $ git commit -m "Commit 056: Tarea: CRUD para las categorías"
     + $ git push -u origin main
@@ -1650,6 +1944,10 @@
 ## Crear base de datos en MongoDB Atlas
 1. mmmm
 
+
+
+
+
 ## Deploy del proyecto en Heroku
 1. Crear en la raíz del proyecto el archivo **Procfile** (sin extensión) para elegir un servidor apache en Heroku y también indicarle la ubicación del archivo incial index.php:
     ```
@@ -1663,7 +1961,7 @@
 6. Clic en el botón Connect to GitHub e ingresar las credenciales.
 7. Seleccionar el repositorio **laravel_mongodb_2021** y presionar el botón **Connect**.
 8. Para tener siempre la ultima actualización de nuestro proyecto se recomienda presionar el botón **Enable Automatic Deploys**.
-9. Presionar el botón Deploy Branch.
+9. Presionar el botón **Deploy Branch**.
 10. Descargar e instalar [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli).
 12. En la terminal en la raíz del proyecto en local e iniciar sesión en Heroku:
     + $ heroku login
@@ -1677,43 +1975,14 @@
     + $ heroku config:add APP_KEY=base64:uj60tvtM5vsuqIkjdkY4dCsyTH3BfhTl3VrGMd9IhAk=
     + $ heroku config:add APP_DEBUG=false
     + $ heroku config:add APP_URL=https://laravelmongo.herokuapp.com
-    + $ heroku config:add FILESYSTEM_DRIVER=public
-
-
-
 15. Registrar variables de entorno de la base de datos desde la terminal:
     + $ heroku config:add DB_CONNECTION=mongodb
     + $ heroku config:add DB_DSN="mongodb+srv://petrix:xiphos333@cluster0.7y5of.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
     + $ heroku config:add DB_PORT=27017
     + $ heroku config:add DB_DATABASE=laramongo
     + $ heroku config:add DB_USERNAME=petrix
-    + $ heroku config:add DB_PASSWORD=xiphos333
+    + $ heroku config:add DB_PASSWORD=***
 16. Salir de Heroku:
     + $ heroku logout
 18. Desconectar con repositorio Heroku:
     + $ git remote rm heroku
-
-Username: petrix
-Password: xiphos333
-
-https://downloads.mongodb.com/compass/mongosh-1.1.0-win32-x64.zip
-
-
-heroku config:add DB_DSN="mongodb+srv://petrix:xiphos333@cluster0.hrqzg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
-
-DB_CONNECTION=mongodb
-DB_HOST=127.0.0.1
-DB_PORT=27017
-DB_DATABASE=laramongo
-DB_USERNAME=
-DB_PASSWORD=
-
-DB_CONNECTION=mongodb
-DB_DSN=mongodb+srv://petrix:xiphos333@cluster0.hrqzg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
-DB_PORT=27017
-DB_DATABASE=laramongo
-DB_USERNAME=petrix
-DB_PASSWORD=xiphos333
-
-mongodb+srv://petrix:<password>@cluster0.hrqzg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
-host
