@@ -19,7 +19,8 @@ class BookController extends Controller
     {
         // $this->testhasOne();
         // $this->testhasOneEmbedded();
-        $this->testHasManyFK();
+        // $this->testHasManyFK();
+        // $this->testHasManyEmbedded();
         $books = Book::orderBy('created_at', 'desc')->paginate(10);
         return view('dashboard.book.index', compact('books'));
     }
@@ -128,5 +129,17 @@ class BookController extends Controller
 
         $category->books()->save($book);
         dd($category->books);
+    }
+    
+    // Tipo documento embebido
+    private function testHasManyEmbedded(){
+        // _id book: 6182ecdd9a5a00006b004f5a
+        $book = Book::find('6182ecdd9a5a00006b004f5a');
+        $category = Category::first()->ToArray();
+
+        $book->push('categories', $category);
+        $book->save();
+
+        dd($book->categories);
     }
 }

@@ -1988,7 +1988,7 @@
     {
         // $this->testhasOne();
         // $this->testhasOneEmbedded();
-        $this->testHasManyFK();
+        // $this->testHasManyFK();
         $books = Book::orderBy('created_at', 'desc')->paginate(10);
         return view('dashboard.book.index', compact('books'));
     }
@@ -1999,7 +1999,79 @@
     + $ git push -u origin main
 
 ### Video 060. Relaciones de Uno a Muchos y de Muchos a Uno con documento embebido
+1. Modificar el modelo **app\Book.php**:
+    ```php
+    <?php
 
+    namespace App;
+
+    /* use Illuminate\Database\Eloquent\Model; */
+    use Jenssegers\Mongodb\Eloquent\Model;
+
+    class Book extends Model
+    {
+        protected $primaryKey = '_id';
+        protected $fillable = ['_id', 'title', 'description', 'age'/* , 'category' */, 'categories'];
+        protected $collection = 'books_collection';
+
+        // Relación 1:1 Category - Book
+        /* public function category(){
+            return $this->hasOne(Category::class);
+        } */
+
+        // Relación 1:n Category - Book
+        /* public function category(){
+            return $this->belongsTo(Category::class);
+        } */
+    }
+    ```
+2. Modificar el modelo **app\Category.php**:
+    ```php
+    <?php
+
+    namespace App;
+
+    /* use Illuminate\Database\Eloquent\Model; */
+    use Jenssegers\Mongodb\Eloquent\Model;
+
+    class Category extends Model
+    {
+        protected $primaryKey = '_id';
+        protected $fillable = ['_id', 'title'];
+        protected $collection = 'categories_collection';
+
+        // Relación inversa 1:n Category - 
+        /* public function books(){
+            return $this->hasMany(Book::class);
+        } */
+    }
+    ```
+3. Crear método **testHasManyEmbedded** en el controlador **app\Http\Controllers\Dashboard\BookController.php** para probar la relación HasMany:
+    ```php
+    // Tipo documento embebido
+    private function testHasManyEmbedded(){
+        // _id book: 6182ecdd9a5a00006b004f5a
+        $book = Book::find('6182ecdd9a5a00006b004f5a');
+        $category = Category::first()->ToArray();
+
+        $book->push('categories', $category);
+        $book->save();
+
+        dd($book->categories);
+    }
+    ```
+4. Probar método **testHasManyEmbedded** con el método **index** del controlador **app\Http\Controllers\Dashboard\BookController.php** y luego comentar la invocación al método:
+    ```php
+    public function index()
+    {
+        // $this->testhasOne();
+        // $this->testhasOneEmbedded();
+        // $this->testHasManyFK();
+        // $this->testHasManyEmbedded();
+        $books = Book::orderBy('created_at', 'desc')->paginate(10);
+        return view('dashboard.book.index', compact('books'));
+    }
+    ```
 5. Commit Video 060:
     + $ git add .
     + $ git commit -m "Commit 060: Relaciones de Uno a Muchos y de Muchos a Uno con documento embebido"
@@ -2012,7 +2084,16 @@
 ### Video 062. Guardar categoría de un libro
 ### Video 063. Código fuente de la sección
 
+## Sección 09: Relaciones de muchos a muchos MongoDB y Laravel
 
+### Video 064. Introducción
+### Video 065. Tarea: CRUD para los tags
+### Video 066. Relación Many To Many (Muchos a Muchos) con FK
+### Video 067. Tags Libros: Estructura inicial
+### Video 068. Tags Libros: Guardar etiquetas de los libros
+### Video 069. Tags Libros: Eliminar etiquetas de los libros
+### Video 070. Código fuente de la sección
+### Video 071. Documentos por referencia
 
 
 
