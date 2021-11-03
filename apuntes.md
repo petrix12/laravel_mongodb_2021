@@ -2184,10 +2184,19 @@
     + $ git push -u origin main
 
 ### Video 063. Código fuente de la sección
++ Código fuente de la sección: Por favor, no se les olvide de calificar el curso y dejarme una reseña si te ha servido y has aprendiendo; eso me ayuda a llegar a mas personas como tú y dar lo mejor de mí con más material para este curso!
++ [Código fuente de la sección](00_fuentes_autor\seccion08_laramongo.zip)
+1. Commit Video 063:
+    + $ git add .
+    + $ git commit -m "Commit 063: Código fuente de la sección"
+    + $ git push -u origin main
 
 ## Sección 09: Relaciones de muchos a muchos MongoDB y Laravel
 
 ### Video 064. Introducción
+
+
+
 ### Video 065. Tarea: CRUD para los tags
 ### Video 066. Relación Many To Many (Muchos a Muchos) con FK
 ### Video 067. Tags Libros: Estructura inicial
