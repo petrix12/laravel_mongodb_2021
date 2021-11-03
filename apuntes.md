@@ -2077,11 +2077,24 @@
     + $ git commit -m "Commit 060: Relaciones de Uno a Muchos y de Muchos a Uno con documento embebido"
     + $ git push -u origin main
 
-### Video 061. Tarea y recordatorio
-
-
+### Nota 061. Tarea y recordatorio
+1. Tarea y recordatorio:
+    + Te queda como tarea aplicar las relaciones de tipo One to One y One to Many y viceversa de tipo FK y de documentos que vimos hasta este punto nuevamente en tu proyecto pero sin ver las clases; y esto es para reforzar conocimientos.
+    + Recuerda que siempre es básico saber como operan este tipo de relaciones y cual emplear en tu proyecto, cual se adapta más a tus necesidades, si las de tipo documentos embebidos que son recomendadas cuando tienes datos únicos en la relación, cuando sabes que los datos a relacionar NO los vas a emplear o repetir en otros documentos/registros de la relación; por ejemplo, la dirección (o direcciones) de un usuario, que sabemos que es única y no se va a repetir para otros usuarios; por otra parte, las relaciones de tipo de FK son útiles cuando sabes que estos datos van a cambiar en el tiempo, por ejemplo, en el esquema de post y categorías en donde una categoría la vas a aplicar a más de un post.
+2. Commit Nota 061:
+    + $ git add .
+    + $ git commit -m "Commit 061: Tarea y recordatorio"
+    + $ git push -u origin main
 
 ### Video 062. Guardar categoría de un libro
+
+
+
+5. Commit Video 062:
+    + $ git add .
+    + $ git commit -m "Commit 062: Guardar categoría de un libro"
+    + $ git push -u origin main
+
 ### Video 063. Código fuente de la sección
 
 ## Sección 09: Relaciones de muchos a muchos MongoDB y Laravel
