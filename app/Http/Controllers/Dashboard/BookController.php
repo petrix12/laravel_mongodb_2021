@@ -6,6 +6,7 @@ use App\Book;
 use App\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SaveBook;
+use App\Tag;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -21,8 +22,21 @@ class BookController extends Controller
         // $this->testhasOneEmbedded();
         // $this->testHasManyFK();
         // $this->testHasManyEmbedded();
+        // $this->testBelongsManyFK();
         $books = Book::orderBy('created_at', 'desc')->paginate(10);
         return view('dashboard.book.index', compact('books'));
+    }
+
+    private function testBelongsManyFK(){
+        // tagID 61cb5bece634000070003af4 61cb5bc9e634000070003af3
+        $book = Book::find('6182f9bf9a5a00006b004f5b');
+        $tag = Tag::find("61cb5bece634000070003af4");
+
+        dd($book->tags());
+
+        $book->tags()->attach(
+            $tag
+        );
     }
 
     /**

@@ -2505,11 +2505,48 @@
     ```
 9. Commit Video 065:
     + $ git add .
-    + $ git commit -m "Commit 064: Tarea: CRUD para los tags"
+    + $ git commit -m "Commit 065: Tarea: CRUD para los tags"
     + $ git push -u origin main
 
-
 ### Video 066. Relación Many To Many (Muchos a Muchos) con FK
+1. Crear función de prueba **testBelongsManyFK** en controlador **app\Http\Controllers\Dashboard\BookController.php**:
+    ```php
+    private function testBelongsManyFK(){
+        // tagID 61cb5bece634000070003af4 61cb5bc9e634000070003af3
+        $book = Book::find('6182f9bf9a5a00006b004f5b');
+        $tag = Tag::find("61cb5bece634000070003af4");
+
+        dd($book->tags());
+
+        $book->tags()->attach(
+            $tag
+        );
+    }
+    ```
+2. Modificar modelo **app\Book.php**:
+    ```php
+    ≡
+    class Book extends Model
+    {
+        ≡
+        // Relación n:m Tag - Book
+        public function tags(){
+            return $this->belongsToMany(Category::class);
+        }
+    }
+    ```
+3. Modificar el método **books** del modelo **app\Tag.php**:
+    ```php
+    // Relación inversa 1:n Category - 
+    public function books(){
+        return $this->belongsToMany(Book::class);
+    }
+    ```
+4. Commit Video 066:
+    + $ git add .
+    + $ git commit -m "Commit 066: Relación Many To Many (Muchos a Muchos) con FK"
+    + $ git push -u origin main
+
 ### Video 067. Tags Libros: Estructura inicial
 ### Video 068. Tags Libros: Guardar etiquetas de los libros
 ### Video 069. Tags Libros: Eliminar etiquetas de los libros

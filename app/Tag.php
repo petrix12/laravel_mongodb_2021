@@ -13,6 +13,6 @@ class Tag extends Model
 
     // Relación inversa 1:n Category - 
     public function books(){
-        //return $this->hasMany(Book::class);
+        return $this->belongsToMany(Book::class);
     }
 }
