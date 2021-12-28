@@ -2201,6 +2201,314 @@
     + $ git push -u origin main
 
 ### Video 065. Tarea: CRUD para los tags
+1. Crear modelo **app\Tag.php**:
+    ```php
+    <?php
+
+    namespace App;
+
+    /* use Illuminate\Database\Eloquent\Model; */
+    use Jenssegers\Mongodb\Eloquent\Model;
+
+    class Tag extends Model
+    {
+        protected $primaryKey = '_id';
+        protected $fillable = ['_id', 'title'];
+        protected $collection = 'tags_collection';
+
+        // Relación inversa 1:n Tag - 
+        public function books(){
+            //return $this->hasMany(Book::class);
+        }
+    }
+    ```
+2. Crear vista **resources\views\dashboard\tag\_form.blade.php**:
+    ```php
+    @csrf
+    <label for="title">Título</label>
+    <input name="title" id="title" type="text" class="form-control" value="{{ old('title', $tag->title ) }}">    
+    ```
+3. Crear vista **resources\views\dashboard\tag\create.blade.php**:
+    ```php
+    @extends('dashboard.master')
+    @section('content')
+        <div class="card mt-4">
+            <div class="card-header">
+                Crear tag
+            </div>
+            <div class="card-body">
+                @include('dashboard.partials.errors-form')
+                <form action="{{ route('tag.store') }}" method="post">
+                    @include('dashboard.tag._form')
+                    <input type="submit" value="Enviar" class="mt-3 btn btn-success">
+                </form>
+            </div>
+        </div>
+    @endsection
+    ```
+4. Crear vista **resources\views\dashboard\tag\edit.blade.php**:
+    ```php
+    @extends('dashboard.master')
+    @section('content')
+        <div class="card mt-4">
+            <div class="card-header">
+                Editar tag: {{ $tag->title }}
+            </div>
+            <div class="card-body">
+                @include('dashboard.partials.errors-form')
+                <form action="{{ route('tag.update', $tag->_id) }}" method="post">
+                    @method('PUT')
+                    @include('dashboard.tag._form')
+                    <input type="submit" value="Actualizar" class="mt-3 btn btn-success">
+                </form>
+            </div>
+        </div>
+    @endsection
+    ```
+5. Crear vista **resources\views\dashboard\tag\index.blade.php**:
+    ```php
+    @extends('dashboard.master')
+    @section('content')
+        <div class="card mt-4">
+            <div class="card-header">
+                Lista de tags MongoDB
+            </div>
+            <div class="card-body my-2">
+                <a href="{{ route('tag.create') }}" class="btn btn-success text-white">
+                    <i class="fa fa-plus"></i> Crear
+                </a>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Título</th>
+                            <th>Creación</th>
+                            <th>Actualización</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($tags as $tag)
+                            <tr>
+                                <td>{{ $tag->_id }}</td>
+                                <td>{{ $tag->title }}</td>
+                                <td>{{ $tag->created_at->format('d-m-Y') }}</td>
+                                <td>{{ $tag->updated_at->format('d-m-Y') }}</td>
+                                <td>
+                                    <a class="btn btn-sm btn-success text-white" href="{{ route('tag.edit', $tag->_id) }}">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a 
+                                        data-id="{{ $tag->_id }}"
+                                        data-title="{{ $tag->title }}"
+                                        class="btn btn-sm btn-danger text-white" 
+                                        href="#" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#deleteModal"
+                                    >
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                {{ $tags->links() }}
+            </div>
+        </div>
+
+        {{-- Modal --}}
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Eliminar <span></span></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Seguro que quieres eliminar el registro seleccionado?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <form id="formDelete" data-action="{{ route('tag.destroy', 0) }}" action="{{ route('tag.destroy', 0) }}" method="post">
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- script Modal --}}
+        <script>
+        var deleteModal = document.getElementById('deleteModal')
+        deleteModal.addEventListener('show.bs.modal', function (event) {
+            // Button that triggered the modal
+            var button = event.relatedTarget
+            // Extract info from data-bs-* attributes
+            var id = button.getAttribute('data-id')
+            var title = button.getAttribute('data-title')
+
+            // Form
+            var action = document.getElementById('formDelete').getAttribute('data-action')
+            action = action.slice(0,-1)
+            document.getElementById('formDelete').setAttribute('action', action + id)
+            
+            // Update the modal's content.
+            var modalTitle = deleteModal.querySelector('.modal-title span')
+
+            modalTitle.textContent = title
+        })
+        </script>
+    @endsection
+    ```
+6. Modificar archivo de rutas **routes\web.php**:
+    ```php
+    ≡
+    Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard', 'middleware' => 'auth'], function () {
+        ≡
+        Route::resource('tag', 'TagController');
+    });
+    ```
+7. Crear request **app\Http\Requests\SaveTag.php**:
+    ```php
+    <?php
+
+    namespace App\Http\Requests;
+
+    use Illuminate\Foundation\Http\FormRequest;
+
+    class SaveTag extends FormRequest
+    {
+        /**
+        * Determine if the user is authorized to make this request.
+        *
+        * @return bool
+        */
+        public function authorize()
+        {
+            return true;
+        }
+
+        /**
+        * Get the validation rules that apply to the request.
+        *
+        * @return array
+        */
+        public function rules()
+        {
+            return $this->myRules();
+        }
+
+        public function myRules(){
+            return [
+                'title' => 'required|string|max:255',
+            ];
+        }
+    }
+    ```
+8. Crear controlador **app\Http\Controllers\Dashboard\TagController.php**:
+    ```php
+    <?php
+
+    namespace App\Http\Controllers\Dashboard;
+
+    use App\Tag;
+    use App\Http\Controllers\Controller;
+    use App\Http\Requests\SaveTag;
+    use Illuminate\Http\Request;
+
+    class TagController extends Controller
+    {
+        /**
+        * Display a listing of the resource.
+        *
+        * @return \Illuminate\Http\Response
+        */
+        public function index()
+        {
+            $tags = Tag::orderBy('created_at', 'desc')->paginate(10);
+            return view('dashboard.tag.index', compact('tags'));
+        }
+
+        /**
+        * Show the form for creating a new resource.
+        *
+        * @return \Illuminate\Http\Response
+        */
+        public function create()
+        {
+            $tag = new Tag();
+            return view('dashboard.tag.create', compact('tag'));
+        }
+
+        /**
+        * Store a newly created resource in storage.
+        *
+        * @param  \Illuminate\Http\Request  $request
+        * @return \Illuminate\Http\Response
+        */
+        public function store(SaveTag $request)
+        {
+            Tag::create($request->validated());
+            return back()->with('status', 'Tag creado correctamente');
+        }
+
+        /**
+        * Display the specified resource.
+        *
+        * @param  \App\Tag  $tag
+        * @return \Illuminate\Http\Response
+        */
+        public function show(Tag $tag)
+        {
+            //
+        }
+
+        /**
+        * Show the form for editing the specified resource.
+        *
+        * @param  \App\Tag  $tag
+        * @return \Illuminate\Http\Response
+        */
+        public function edit(Tag $tag)
+        {
+            return view('dashboard.tag.edit', compact('tag'));
+        }
+
+        /**
+        * Update the specified resource in storage.
+        *
+        * @param  \Illuminate\Http\Request  $request
+        * @param  \App\Tag  $tag
+        * @return \Illuminate\Http\Response
+        */
+        public function update(SaveTag $request, Tag $tag)
+        {
+            $tag->update($request->validated());
+            return back()->with('status', 'Tag ' . $tag->title . ' actualizado correctamente');
+        }
+
+        /**
+        * Remove the specified resource from storage.
+        *
+        * @param  \App\Tag  $tag
+        * @return \Illuminate\Http\Response
+        */
+        public function destroy(Tag $tag)
+        {
+            $tag->delete();
+            return back()->with('status', 'Tag ' . $tag->title . ' eliminado correctamente');
+        }
+    }
+    ```
+9. Commit Video 065:
+    + $ git add .
+    + $ git commit -m "Commit 064: Tarea: CRUD para los tags"
+    + $ git push -u origin main
+
+
 ### Video 066. Relación Many To Many (Muchos a Muchos) con FK
 ### Video 067. Tags Libros: Estructura inicial
 ### Video 068. Tags Libros: Guardar etiquetas de los libros

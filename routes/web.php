@@ -13,4 +13,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'dashboard', 'namespace' => 'Dashboard', 'middleware' => 'auth'], function () {
     Route::resource('book', 'BookController');
     Route::resource('category', 'CategoryController');
+    Route::resource('tag', 'TagController');
 });
