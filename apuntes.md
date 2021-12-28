@@ -2194,8 +2194,11 @@
 ## Sección 09: Relaciones de muchos a muchos MongoDB y Laravel
 
 ### Video 064. Introducción
-
-
++ Contenido: Introducción a la sección.
+1. Commit Video 064:
+    + $ git add .
+    + $ git commit -m "Commit 064: Código fuente de la sección"
+    + $ git push -u origin main
 
 ### Video 065. Tarea: CRUD para los tags
 ### Video 066. Relación Many To Many (Muchos a Muchos) con FK
