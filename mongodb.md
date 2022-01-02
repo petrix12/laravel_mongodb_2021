@@ -37,12 +37,16 @@
 ## Sección 2: Introducción a MongoDB
 
 ### Video 06. 2.1 ¿Qué es MongoDB?
++ **Contenido**: sobre MongoDB.
+
 ### Video 07. 2.2 Instalación de MongoDB en Windows
-11 min
++ **Contenido**: sobre la descarga e instalación de MongoDB.
+
 ### Video 08. 2.3 Primeros pasos con MongoDB
-3 min
++ **Contenido**: sobre como ejecutar un servicio de MongoDB y un cliente de MongoDB.
+
 ### Video 09. 2.4 Drivers en MongoDB
-2 min
++ **Contenido**: sobre drivers en MongoDB.
 
 ## Sección 3: Operaciones CRUD
 

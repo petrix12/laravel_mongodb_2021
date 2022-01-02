@@ -83,7 +83,8 @@ class BookController extends Controller
     public function edit(Book $book)
     {
         $categories = Category::pluck('_id', 'title');
-        return view('dashboard.book.edit', compact('book', 'categories'));
+        $tags = Tag::pluck('_id', 'title');
+        return view('dashboard.book.edit', compact('book', 'categories', 'tags'));
     }
 
     /**

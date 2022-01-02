@@ -12,5 +12,12 @@
                 <input type="submit" value="Actualizar" class="mt-3 btn btn-success">
             </form>
         </div>
+
+        <div class="card-header">
+            Etiquetas de libro: {{ $book->title }}
+        </div>
+        <div class="card-body">
+            @include('dashboard.book._tags')
+        </div>
     </div>
 @endsection

@@ -2548,7 +2548,67 @@
     + $ git push -u origin main
 
 ### Video 067. Tags Libros: Estructura inicial
+1. Modificar el método **edit** del controlador **app\Http\Controllers\Dashboard\BookController.php**:
+    ```php
+    public function edit(Book $book)
+    {
+        $categories = Category::pluck('_id', 'title');
+        $tags = Tag::pluck('_id', 'title');
+        return view('dashboard.book.edit', compact('book', 'categories', 'tags'));
+    }
+    ```
+2. Crear vista **resources\views\dashboard\book\_tags.blade.php**:
+    ```php
+    <div class="row">
+        <div class="col-10">
+            <select id="tag_id" class="form-control">
+                @foreach ($tags as $title => $id)
+                    <option value="{{ $id }}">{{ $title }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-2">
+            <button class="btn btn-success" id="tag_save">Enviar</button>
+        </div>
+    </div>
+
+    @foreach ($book->tags as $tag)
+        <button id="{{ $tag->_id }}" class="btn btn-danger btn-sm mt-2 ml-1"><i class="fa fa-trash"></i>{{ $tag->title }}</button>
+    @endforeach
+    ```
+3. Modificar la vista **resources\views\dashboard\book\edit.blade.php**:
+    ```php
+    @extends('dashboard.master')
+    @section('content')
+        <div class="card mt-4">
+            <div class="card-header">
+                Editar libro: {{ $book->title }}
+            </div>
+            <div class="card-body">
+                @include('dashboard.partials.errors-form')
+                <form action="{{ route('book.update', $book->_id) }}" method="post">
+                    @method('PUT')
+                    @include('dashboard.book._form')
+                    <input type="submit" value="Actualizar" class="mt-3 btn btn-success">
+                </form>
+            </div>
+
+            <div class="card-header">
+                Etiquetas de libro: {{ $book->title }}
+            </div>
+            <div class="card-body">
+                @include('dashboard.book._tags')
+            </div>
+        </div>
+    @endsection
+    ```
+4. Commit Video 067:
+    + $ git add .
+    + $ git commit -m "Commit 067: Tags Libros: Estructura inicial"
+    + $ git push -u origin main
+
 ### Video 068. Tags Libros: Guardar etiquetas de los libros
+
 ### Video 069. Tags Libros: Eliminar etiquetas de los libros
 ### Video 070. Código fuente de la sección
 ### Video 071. Documentos por referencia
